@@ -18,6 +18,21 @@ export default function Intro() {
         margin: '0 auto'
       }}>
       <div style={{ flex: '1 1 460px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
+        <div style={{
+          backgroundColor: 'rgba(217, 164, 65, 0.15)',
+          borderLeft: '4px solid var(--color-gold)',
+          padding: '16px',
+          borderRadius: '4px',
+          color: 'var(--color-ink)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px'
+        }}>
+          <span style={{ fontSize: '20px' }}>ℹ️</span>
+          <span style={{ fontSize: '15px', lineHeight: 1.4 }}>
+            <strong>On break:</strong> Classes resume in August 2026
+          </span>
+        </div>
         <h2 style={{ 
           fontFamily: 'var(--font-heading)', 
           fontWeight: 800, 
