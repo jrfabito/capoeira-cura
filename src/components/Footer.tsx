@@ -15,6 +15,7 @@ export default function Footer() {
         <img 
           src="/logo.png" 
           alt="Capoeira Cura Logo" 
+          loading="lazy"
           style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} 
         />
         <span style={{ 

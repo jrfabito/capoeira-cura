@@ -6,12 +6,13 @@ export default function Gallery() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" as const }}
       style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', marginTop: '40px' }}
     >
       <motion.img 
         src="/assets/gallery-1.jpg" 
         alt="Group class" 
+        loading="lazy"
         whileHover={{ scale: 1.03, zIndex: 1, position: 'relative' }}
         style={{ width: '100%', height: 'clamp(260px,32vw,440px)', objectFit: 'cover' }}
         onError={(e) => {
@@ -21,6 +22,7 @@ export default function Gallery() {
       <motion.img 
         src="/assets/gallery-2.jpg" 
         alt="Cultural festival" 
+        loading="lazy"
         whileHover={{ scale: 1.03, zIndex: 1, position: 'relative' }}
         style={{ width: '100%', height: 'clamp(260px,32vw,440px)', objectFit: 'cover' }}
         onError={(e) => {

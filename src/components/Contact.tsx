@@ -45,7 +45,7 @@ export default function Contact() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
   return (
@@ -87,11 +87,12 @@ export default function Contact() {
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
           <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>2450 Grant St., Concord, CA 94520</span>
-          <a href="https://www.facebook.com/profile.php?id=100090832085640" target="_blank" rel="noopener noreferrer" style={{ fontSize: '15px' }}>Add us</a>
+          <a href="https://www.facebook.com/profile.php?id=100090832085640" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page" style={{ fontSize: '15px' }}>Add us</a>
         </div>
       </motion.div>
       <motion.form variants={itemVariants} onSubmit={handleSubmit} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <input
+          id="name"
           required
           type="text"
           name="name"
@@ -99,6 +100,7 @@ export default function Contact() {
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <input
+          id="email"
           required
           type="email"
           name="email"
@@ -106,6 +108,7 @@ export default function Contact() {
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <textarea
+          id="message"
           required
           name="message"
           placeholder="Tell us a bit about yourself"

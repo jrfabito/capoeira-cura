@@ -13,7 +13,7 @@ export default function Location() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
   return (
@@ -70,6 +70,7 @@ export default function Location() {
           <img 
             src="/assets/loc-parking.jpg" 
             alt="Parking lot near the studio" 
+            loading="lazy"
             style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', borderRadius: '8px' }}
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=2940&auto=format&fit=crop';
@@ -84,6 +85,7 @@ export default function Location() {
           <img 
             src="/assets/loc-studio.jpg" 
             alt="Dance studio building" 
+            loading="lazy"
             style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', borderRadius: '8px' }}
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1518042456426-ed877bc954fb?q=80&w=2942&auto=format&fit=crop';

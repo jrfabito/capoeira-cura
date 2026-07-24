@@ -17,7 +17,7 @@ export default function Videos() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
   return (
@@ -70,7 +70,7 @@ export default function Videos() {
               </div>
             ) : (
               <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', borderRadius: '8px', overflow: 'hidden' }}>
-                <img src={`/assets/${v.id}-thumb.jpg`} alt="Video thumbnail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={`/assets/${v.id}-thumb.jpg`} alt="Video thumbnail" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
                   <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(58,14,40,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ width: 0, height: 0, borderStyle: 'solid', borderWidth: '9px 0 9px 15px', borderColor: 'transparent transparent transparent #FFFFFF', marginLeft: '3px' }}></div>

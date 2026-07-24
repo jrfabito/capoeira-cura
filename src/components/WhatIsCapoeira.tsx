@@ -6,7 +6,7 @@ export default function WhatIsCapoeira() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" as const }}
       style={{
         display: 'flex', 
         flexWrap: 'wrap-reverse', 
@@ -16,9 +16,10 @@ export default function WhatIsCapoeira() {
         maxWidth: '1440px', 
         margin: '0 auto'
       }}>
-      <motion.img 
-        src="/assets/what-is-capoeira.jpg" 
-        alt="Capoeira movement" 
+        <motion.img 
+          src="/assets/what-is-capoeira.jpg" 
+          alt="Capoeira movement" 
+          loading="lazy"
         whileHover={{ scale: 1.03 }}
         style={{ flex: '1 1 420px', minWidth: '280px', aspectRatio: '4/3', objectFit: 'cover', borderRadius: '10px' }}
         onError={(e) => {

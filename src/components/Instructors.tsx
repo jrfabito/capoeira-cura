@@ -11,7 +11,7 @@ export default function Instructors() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
   return (
@@ -48,6 +48,7 @@ export default function Instructors() {
           <img 
             src="/assets/mestre-preguica.jpg" 
             alt="Mestre Preguiça" 
+            loading="lazy"
             style={{ flex: '1 1 320px', minWidth: '240px', maxWidth: '380px', aspectRatio: '1/1', objectFit: 'cover', borderRadius: '10px' }}
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=2835&auto=format&fit=crop';
@@ -74,6 +75,7 @@ export default function Instructors() {
           <img 
             src="/assets/mestre-espantalho.jpg" 
             alt="Mestre Espantalho" 
+            loading="lazy"
             style={{ flex: '1 1 320px', minWidth: '240px', maxWidth: '380px', aspectRatio: '1/1', objectFit: 'cover', borderRadius: '10px' }}
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549889656-1b44ebf2ff83?q=80&w=2938&auto=format&fit=crop';

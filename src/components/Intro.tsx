@@ -7,7 +7,7 @@ export default function Intro() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" as const }}
       style={{
         display: 'flex', 
         flexWrap: 'wrap', 
@@ -53,6 +53,7 @@ export default function Intro() {
         <motion.img 
           src="/assets/intro-1.jpg" 
           alt="Class photo" 
+          loading="lazy"
           whileHover={{ scale: 1.03 }}
           style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px' }}
           onError={(e) => {
@@ -62,6 +63,7 @@ export default function Intro() {
         <motion.img 
           src="/assets/intro-2.jpg" 
           alt="Culture photo" 
+          loading="lazy"
           whileHover={{ scale: 1.03 }}
           style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', marginTop: '36px' }}
           onError={(e) => {

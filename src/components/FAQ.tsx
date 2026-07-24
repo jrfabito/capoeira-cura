@@ -26,7 +26,7 @@ export default function FAQ() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
   return (
@@ -65,6 +65,8 @@ export default function FAQ() {
             return (
               <motion.div variants={itemVariants} key={i} style={{ borderBottom: '1px solid var(--color-divider)' }}>
                 <button 
+                  id={`faq-button-${i}`}
+                  aria-controls={`faq-answer-${i}`}
                   onClick={() => toggle(i)} 
                   style={{ 
                     width: '100%', 
@@ -96,6 +98,7 @@ export default function FAQ() {
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
+                      id={`faq-answer-${i}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}

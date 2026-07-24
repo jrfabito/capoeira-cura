@@ -16,16 +16,18 @@ function App() {
   return (
     <>
       <Header />
-      <Hero />
-      <Intro />
-      <Gallery />
-      <WhatIsCapoeira />
-      <Schedule />
-      <Location />
-      <Instructors />
-      <Videos />
-      <FAQ />
-      <Contact />
+      <main>
+        <Hero />
+        <Intro />
+        <Gallery />
+        <WhatIsCapoeira />
+        <Schedule />
+        <Location />
+        <Instructors />
+        <Videos />
+        <FAQ />
+        <Contact />
+      </main>
       <Footer />
     </>
   );
