@@ -12,8 +12,8 @@ export const translations = {
     es: "Entra a la roda, encuentra tu ritmo y comienza tu viaje en la capoeira"
   },
   introDesc: {
-    en: "Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. Whatever brought you here, our classes meet you where you are: beginners and seasoned players train, play, and grow together in the roda.",
-    es: "Capoeira Cura es una divertida comunidad que practica Capoeira, un dinámico arte afrobrasileño que combina artes marciales, danza, acrobacias y música en vivo. Sea lo que sea que te haya traído aquí, nuestras clases se adaptan a tu nivel: principiantes y practicantes experimentados entrenan, juegan y crecen juntos en la roda."
+    en: "Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. \"Capoeira Cura\" translates to \"Capoeira Heals,\" reflecting our belief in movement as medicine. Whatever brought you here, our classes meet you where you are: beginners and seasoned players train, play, and grow together in the roda.",
+    es: "Capoeira Cura es una divertida comunidad que practica Capoeira, un dinámico arte afrobrasileño que combina artes marciales, danza, acrobacias y música en vivo. \"Capoeira Cura\" significa \"La Capoeira Sana\", reflejando nuestra creencia en el movimiento como medicina. Sea lo que sea que te haya traído aquí, nuestras clases se adaptan a tu nivel: principiantes y practicantes experimentados entrenan, juegan y crecen juntos en la roda."
   },
   whatIsArt: {
     en: "THE ART",
