@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 export default function Schedule() {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.15 } 
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
     }
   };
 
@@ -15,16 +15,16 @@ export default function Schedule() {
   };
 
   return (
-    <motion.section 
-      id="schedule" 
+    <motion.section
+      id="schedule"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={{
         hidden: { opacity: 0 },
-        visible: { 
-          opacity: 1, 
-          transition: { staggerChildren: 0.2 } 
+        visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.2 }
         }
       }}
       style={{ background: 'var(--color-maroon)', padding: 'clamp(70px,9vw,120px) clamp(20px,6vw,80px)' }}
@@ -52,8 +52,25 @@ export default function Schedule() {
           <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted-on-maroon)', maxWidth: '640px', margin: 0 }}>
             No experience needed — just bring comfortable clothes, a bottle of water, and an open mind. Your first class is free.
           </p>
+          <div style={{
+            backgroundColor: 'rgba(217, 164, 65, 0.15)',
+            borderLeft: '4px solid var(--color-gold)',
+            padding: '16px',
+            borderRadius: '4px',
+            color: '#FFFFFF',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            marginTop: '8px',
+            textAlign: 'left'
+          }}>
+            <span style={{ fontSize: '20px' }}>ℹ️</span>
+            <span style={{ fontSize: '15px', lineHeight: 1.4 }}>
+              <strong>On break:</strong> Classes resume in August 2026
+            </span>
+          </div>
         </motion.div>
-        
+
         <motion.div variants={containerVariants} style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', justifyContent: 'center' }}>
           <motion.div variants={itemVariants} style={{
             flex: '1 1 260px',
@@ -95,10 +112,10 @@ export default function Schedule() {
             <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF' }}>All levels welcome<br />Teens and adults</p>
           </motion.div>
         </motion.div>
-        
+
         <motion.div variants={itemVariants} style={{ textAlign: 'center' }}>
-          <motion.a 
-            href="#contact" 
+          <motion.a
+            href="#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             style={{
