@@ -44,7 +44,7 @@ export default function Intro() {
           Step into the roda, find your flow, and start your capoeira journey
         </h2>
         <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. Whatever brought you here, our classes in Concord, CA meet you where you are: beginners and seasoned players train, play, and grow together in the roda.
+          Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. "Capoeira Cura" translates to "Capoeira Heals," reflecting our belief in movement as medicine. Whatever brought you here, our classes in Concord, CA meet you where you are: beginners and seasoned players train, play, and grow together in the roda.
         </p>
         <motion.a
           href="#schedule"
