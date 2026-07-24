@@ -6,10 +6,10 @@ export default function FAQ() {
 
   const faqs = [
     { q: 'Do I need any experience or gear?', a: 'None at all. Come in comfortable clothes you can move in, bare feet, and a water bottle — we\'ll take care of the rest.' },
-    { q: 'What ages can join?', a: 'Our class is for teens and adults. All levels welcome.' },
-    { q: 'Is the first class really free?', a: 'Yes — your first class is on us. After that, drop-ins are $15 per class.' },
+    { q: 'What ages can join?', a: 'Depending on the location, we offer classes for kids, teens, and adults. Please check the schedule section for your specific chapter.' },
+    { q: 'Is the first class really free?', a: 'Yes — your first class is on us. After that, pricing varies by chapter. Check the schedule section for details.' },
     { q: 'What should I bring?', a: 'Just yourself, comfortable clothing, and a water bottle. We provide the music and the community.' },
-    { q: 'Do you train anywhere besides Concord?', a: 'This branch trains in Concord, CA. We also have other branches in Long Beach, CA and León, Mexico.' },
+    { q: 'Where are your chapters located?', a: 'We currently hold classes in Concord, CA, Long Beach, CA, and León, Mexico.' },
   ];
 
   const toggle = (i: number) => {

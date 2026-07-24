@@ -18,21 +18,7 @@ export default function Intro() {
         margin: '0 auto'
       }}>
       <div style={{ flex: '1 1 460px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
-        <div style={{
-          backgroundColor: 'rgba(217, 164, 65, 0.15)',
-          borderLeft: '4px solid var(--color-gold)',
-          padding: '16px',
-          borderRadius: '4px',
-          color: 'var(--color-ink)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px'
-        }}>
-          <span style={{ fontSize: '20px' }}>ℹ️</span>
-          <span style={{ fontSize: '15px', lineHeight: 1.4 }}>
-            <strong>On break:</strong> Classes resume in August 2026
-          </span>
-        </div>
+
         <h2 style={{
           fontFamily: 'var(--font-heading)',
           fontWeight: 800,
@@ -44,25 +30,8 @@ export default function Intro() {
           Step into the roda, find your flow, and start your capoeira journey
         </h2>
         <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. Whatever brought you here, our classes in Concord, CA meet you where you are: beginners and seasoned players train, play, and grow together in the roda.
+          Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. Whatever brought you here, our classes in Concord, Long Beach, and León meet you where you are: beginners and seasoned players train, play, and grow together in the roda.
         </p>
-        <motion.a
-          href="#schedule"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-          style={{
-            alignSelf: 'flex-start',
-            background: 'var(--color-plum)',
-            color: '#FFFFFF',
-            padding: '16px 32px',
-            fontWeight: 700,
-            fontSize: '14px',
-            letterSpacing: '0.05em',
-            borderRadius: '2px',
-            display: 'inline-block'
-          }}>
-          SEE THE SCHEDULE
-        </motion.a>
       </div>
       <div style={{ flex: '1 1 420px', minWidth: '280px', display: 'flex', gap: '16px' }}>
         <motion.img

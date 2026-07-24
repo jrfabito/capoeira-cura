@@ -84,11 +84,10 @@ export default function Contact() {
           Book your free class
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Send us a note and we'll get you set up for your first class in Concord — no experience, no gear, just show up.
+          Send us a note and we'll get you set up for your first class at any of our chapters — no experience, no gear, just show up.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-          <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>2450 Grant St., Concord, CA 94520</span>
-          <a href="https://www.facebook.com/profile.php?id=100090832085640" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page" style={{ fontSize: '15px' }}>Add us on Facebook</a>
+          <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>Serving Concord, Long Beach, and León</span>
         </div>
       </motion.div>
       <motion.form variants={itemVariants} onSubmit={handleSubmit} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '14px' }}>

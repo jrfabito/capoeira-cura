@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Intro from './components/Intro';
@@ -11,18 +11,21 @@ import Videos from './components/Videos';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import type { ChapterId } from './data/chapters';
 
 function App() {
+  const [activeChapter, setActiveChapter] = useState<ChapterId | null>(null);
+
   return (
     <>
       <Header />
       <main>
         <Hero />
+        <Schedule activeChapter={activeChapter} setActiveChapter={setActiveChapter} />
         <Intro />
         <Gallery />
         <WhatIsCapoeira />
-        <Schedule />
-        <Location />
+        <Location activeChapter={activeChapter} />
         <Instructors />
         <Videos />
         <FAQ />

@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
+import { chapters } from '../data/chapters';
+import type { ChapterId } from '../data/chapters';
 
-export default function Schedule() {
+interface ScheduleProps {
+  activeChapter: ChapterId | null;
+  setActiveChapter: (id: ChapterId) => void;
+}
+
+export default function Schedule({ activeChapter, setActiveChapter }: ScheduleProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -52,85 +59,91 @@ export default function Schedule() {
           <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted-on-maroon)', maxWidth: '640px', margin: 0 }}>
             No experience needed — just bring comfortable clothes, a bottle of water, and an open mind. Your first class is free.
           </p>
-          <div style={{
-            backgroundColor: 'rgba(217, 164, 65, 0.15)',
-            borderLeft: '4px solid var(--color-gold)',
-            padding: '16px',
-            borderRadius: '4px',
-            color: '#FFFFFF',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginTop: '8px',
-            textAlign: 'left'
-          }}>
-            <span style={{ fontSize: '20px' }}>ℹ️</span>
-            <span style={{ fontSize: '15px', lineHeight: 1.4 }}>
-              <strong>On break:</strong> Classes resume in August 2026
-            </span>
-          </div>
+
+        </motion.div>
+
+        <motion.div variants={itemVariants} style={{ display: 'flex', justifyContent: 'center', gap: '32px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          {chapters.map(chap => (
+            <button
+              key={chap.id}
+              onClick={() => setActiveChapter(chap.id)}
+              style={{
+                background: 'none',
+                border: 'none',
+                borderBottom: activeChapter === chap.id ? '2px solid var(--color-gold)' : '2px solid transparent',
+                color: activeChapter === chap.id ? 'var(--color-gold)' : '#FFFFFF',
+                padding: '12px 16px',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                fontSize: '13px',
+                letterSpacing: '0.12em',
+                transition: 'all 0.3s'
+              }}
+            >
+              {chap.name}
+            </button>
+          ))}
         </motion.div>
 
         <motion.div variants={containerVariants} style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', justifyContent: 'center' }}>
-          <motion.div variants={itemVariants} style={{
-            flex: '1 1 260px',
-            maxWidth: '320px',
-            background: 'var(--color-maroon-card)',
-            borderRadius: '6px',
-            padding: '32px 28px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
-          }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>WHEN</span>
-            <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF' }}>Mondays & Thursdays<br />7:00 – 8:00 PM</p>
-          </motion.div>
-          <motion.div variants={itemVariants} style={{
-            flex: '1 1 260px',
-            maxWidth: '320px',
-            background: 'var(--color-maroon-card)',
-            borderRadius: '6px',
-            padding: '32px 28px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
-          }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>COST</span>
-            <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF' }}>$15 drop-in<br />First class free</p>
-          </motion.div>
-          <motion.div variants={itemVariants} style={{
-            flex: '1 1 260px',
-            maxWidth: '320px',
-            background: 'var(--color-maroon-card)',
-            borderRadius: '6px',
-            padding: '32px 28px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
-          }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>WHO</span>
-            <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF' }}>All levels welcome<br />Teens and adults</p>
-          </motion.div>
+          {activeChapter === null ? (
+            <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', width: '100%', padding: '32px 0' }}>
+              <p style={{ fontSize: '18px', color: 'var(--color-muted-on-maroon)', margin: 0, fontWeight: 500 }}>
+                Choose a location above to see the schedule.
+              </p>
+            </motion.div>
+          ) : (
+            <>
+              <motion.div key={`when-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} style={{
+                flex: '1 1 260px',
+                maxWidth: '320px',
+                background: 'var(--color-maroon-card)',
+                borderRadius: '6px',
+                padding: '32px 28px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px'
+              }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>WHEN</span>
+                <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
+                  {chapters.find(c => c.id === activeChapter)?.schedule.when}
+                </p>
+              </motion.div>
+              <motion.div key={`cost-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} style={{
+                flex: '1 1 260px',
+                maxWidth: '320px',
+                background: 'var(--color-maroon-card)',
+                borderRadius: '6px',
+                padding: '32px 28px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px'
+              }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>COST</span>
+                <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
+                  {chapters.find(c => c.id === activeChapter)?.schedule.cost}
+                </p>
+              </motion.div>
+              <motion.div key={`who-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 }} style={{
+                flex: '1 1 260px',
+                maxWidth: '320px',
+                background: 'var(--color-maroon-card)',
+                borderRadius: '6px',
+                padding: '32px 28px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px'
+              }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>WHO</span>
+                <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
+                  {chapters.find(c => c.id === activeChapter)?.schedule.who}
+                </p>
+              </motion.div>
+            </>
+          )}
         </motion.div>
 
-        <motion.div variants={itemVariants} style={{ textAlign: 'center' }}>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              background: 'var(--color-gold)',
-              color: 'var(--color-maroon)',
-              padding: '16px 36px',
-              fontWeight: 700,
-              fontSize: '14px',
-              letterSpacing: '0.05em',
-              borderRadius: '2px',
-              display: 'inline-block'
-            }}>
-            RESERVE YOUR FREE CLASS
-          </motion.a>
-        </motion.div>
       </div>
     </motion.section>
   );
