@@ -1,6 +1,10 @@
+import type { ChapterId } from '../data/chapters';
 
+interface FooterProps {
+  activeChapter: ChapterId | null;
+}
 
-export default function Footer() {
+export default function Footer({ activeChapter }: FooterProps) {
   return (
     <footer style={{ 
       background: 'var(--color-maroon-dark)', 
@@ -29,10 +33,10 @@ export default function Footer() {
         </span>
       </div>
       <nav style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-        <a href="#about" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>ABOUT</a>
-        <a href="#schedule" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>SCHEDULE</a>
-        <a href="#videos" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>VIDEOS</a>
-        <a href="#contact" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>CONTACT</a>
+        <a href="#about" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'ACERCA DE' : 'ABOUT'}</a>
+        <a href="#schedule" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'HORARIO' : 'SCHEDULE'}</a>
+        <a href="#videos" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'VIDEOS' : 'VIDEOS'}</a>
+        <a href="#contact" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'CONTACTO' : 'CONTACT'}</a>
       </nav>
       <span style={{ color: 'var(--color-muted-darker-on-maroon)', fontSize: '13px' }}>
         © 2026 Capoeira Cura

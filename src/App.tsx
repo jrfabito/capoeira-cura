@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Intro from './components/Intro';
@@ -12,26 +12,37 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import type { ChapterId } from './data/chapters';
+import { detectClosestChapter } from './utils/geolocation';
 
 function App() {
   const [activeChapter, setActiveChapter] = useState<ChapterId | null>(null);
 
+  useEffect(() => {
+    const initLocation = async () => {
+      const chapter = await detectClosestChapter();
+      if (chapter) {
+        setActiveChapter(chapter);
+      }
+    };
+    initLocation();
+  }, []);
+
   return (
     <>
-      <Header />
+      <Header activeChapter={activeChapter} />
       <main>
-        <Hero />
+        <Hero activeChapter={activeChapter} />
         <Schedule activeChapter={activeChapter} setActiveChapter={setActiveChapter} />
-        <Intro />
+        <Intro activeChapter={activeChapter} />
         <Gallery />
-        <WhatIsCapoeira />
+        <WhatIsCapoeira activeChapter={activeChapter} />
         <Location activeChapter={activeChapter} />
-        <Instructors />
-        <Videos />
-        <FAQ />
-        <Contact />
+        <Instructors activeChapter={activeChapter} />
+        <Videos activeChapter={activeChapter} />
+        <FAQ activeChapter={activeChapter} />
+        <Contact activeChapter={activeChapter} />
       </main>
-      <Footer />
+      <Footer activeChapter={activeChapter} />
     </>
   );
 }

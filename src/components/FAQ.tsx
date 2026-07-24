@@ -1,10 +1,21 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
 
-export default function FAQ() {
+interface FAQProps {
+  activeChapter: ChapterId | null;
+}
+
+export default function FAQ({ activeChapter }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0); // Default open first
 
-  const faqs = [
+  const faqs = activeChapter === 'leon' ? [
+    { q: '¿Necesito experiencia o equipo?', a: 'En lo absoluto. Ven con ropa cómoda con la que puedas moverte, descalzo y con una botella de agua; nosotros nos encargaremos del resto.' },
+    { q: '¿Qué edades pueden unirse?', a: 'Dependiendo de la ubicación, ofrecemos clases para niños, adolescentes y adultos. Consulta la sección de horarios para tu grupo.' },
+    { q: '¿La primera clase es realmente gratis?', a: 'Sí, tu primera clase va por nuestra cuenta. Después de eso, los precios varían según el grupo. Consulta la sección de horarios para obtener más detalles.' },
+    { q: '¿Qué debo llevar?', a: 'Solo tú, ropa cómoda y una botella de agua. Nosotros ponemos la música y la comunidad.' },
+    { q: '¿Dónde están ubicados sus grupos?', a: 'Actualmente damos clases en Concord, CA, Long Beach, CA y León, México.' },
+  ] : [
     { q: 'Do I need any experience or gear?', a: 'None at all. Come in comfortable clothes you can move in, bare feet, and a water bottle — we\'ll take care of the rest.' },
     { q: 'What ages can join?', a: 'Depending on the location, we offer classes for kids, teens, and adults. Please check the schedule section for your specific chapter.' },
     { q: 'Is the first class really free?', a: 'Yes — your first class is on us. After that, pricing varies by chapter. Check the schedule section for details.' },
@@ -47,7 +58,7 @@ export default function FAQ() {
             letterSpacing: '0.12em',
             color: 'var(--color-gold)'
           }}>
-            GOOD TO KNOW
+            {activeChapter === 'leon' ? 'BUENO SABERLO' : 'GOOD TO KNOW'}
           </span>
           <h2 style={{
             fontFamily: 'var(--font-heading)',
@@ -56,7 +67,7 @@ export default function FAQ() {
             margin: 0,
             color: '#FFFFFF'
           }}>
-            Frequently asked questions
+            {activeChapter === 'leon' ? 'Preguntas frecuentes' : 'Frequently asked questions'}
           </h2>
         </motion.div>
         <motion.div variants={containerVariants} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>

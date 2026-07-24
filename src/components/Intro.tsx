@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
+import { t } from '../utils/translations';
 
-export default function Intro() {
+interface IntroProps {
+  activeChapter: ChapterId | null;
+}
+
+export default function Intro({ activeChapter }: IntroProps) {
   return (
     <motion.section
       id="about"
@@ -27,10 +33,10 @@ export default function Intro() {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          Step into the roda, find your flow, and start your capoeira journey
+          {t('introTitle', activeChapter)}
         </h2>
         <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. Whatever brought you here, our classes in Concord, Long Beach, and León meet you where you are: beginners and seasoned players train, play, and grow together in the roda.
+          {t('introDesc', activeChapter)}
         </p>
       </div>
       <div style={{ flex: '1 1 420px', minWidth: '280px', display: 'flex', gap: '16px' }}>

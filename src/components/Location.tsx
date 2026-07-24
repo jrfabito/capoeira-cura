@@ -7,7 +7,8 @@ interface LocationProps {
 }
 
 export default function Location({ activeChapter }: LocationProps) {
-  const currentChapter = activeChapter ? chapters.find(c => c.id === activeChapter)! : null;
+  if (!activeChapter) return null;
+  const currentChapter = chapters.find(c => c.id === activeChapter)!;
   const showOtherLocations = true;
 
   const containerVariants = {
@@ -45,42 +46,32 @@ export default function Location({ activeChapter }: LocationProps) {
           margin: 0, 
           color: 'var(--color-ink)' 
         }}>
-          Where is the class?
+          {activeChapter === 'leon' ? '¿Dónde es la clase?' : 'Where is the class?'}
         </h2>
-        {currentChapter ? (
-          <p style={{ fontSize: '17px', margin: 0 }}>
-            <a 
-              href={`https://www.google.com/maps/search/?api=1&query=${currentChapter.location.mapQuery}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              style={{ color: 'var(--color-muted)', fontWeight: 600 }}
-            >
-              {currentChapter.location.address} ↗
-            </a>
-          </p>
-        ) : (
-          <p style={{ fontSize: '17px', margin: 0, color: 'var(--color-muted)' }}>
-            Please choose a location in the schedule section to view the map.
-          </p>
-        )}
+        <p style={{ fontSize: '17px', margin: 0 }}>
+          <a 
+            href={`https://www.google.com/maps/search/?api=1&query=${currentChapter.location.mapQuery}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ color: 'var(--color-muted)', fontWeight: 600 }}
+          >
+            {currentChapter.location.address} ↗
+          </a>
+        </p>
         {showOtherLocations && (
           <p style={{ fontSize: '14px', margin: '4px 0 0', color: 'var(--color-muted-darker-on-maroon)' }}>
-            We also have sister groups training in other locations.
+            {activeChapter === 'leon' ? 'También tenemos grupos hermanos entrenando en otras ubicaciones.' : 'We also have sister groups training in other locations.'}
           </p>
         )}
       </motion.div>
       <motion.div variants={itemVariants} style={{ width: '100%', aspectRatio: '16/6', borderRadius: '8px', overflow: 'hidden', backgroundColor: 'rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {currentChapter ? (
-          <iframe 
-            title={`Google Map location for Capoeira Cura ${currentChapter.name}`}
-            src={currentChapter.location.mapEmbedUrl} 
-            style={{ width: '100%', height: '100%', border: 0 }} 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        ) : (
-          <span style={{ color: 'var(--color-muted)', fontWeight: 600 }}>Map will appear here</span>
-        )}
+        <iframe 
+          title={`Google Map location for Capoeira Cura ${currentChapter.name}`}
+          src={currentChapter.location.mapEmbedUrl} 
+          style={{ width: '100%', height: '100%', border: 0 }} 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </motion.div>
       {activeChapter === 'concord' && (
         <motion.div key="concord-photos" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>

@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
 
-export default function Contact() {
+interface ContactProps {
+  activeChapter: ChapterId | null;
+}
+
+export default function Contact({ activeChapter }: ContactProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +77,7 @@ export default function Contact() {
           letterSpacing: '0.12em',
           color: 'var(--color-plum)'
         }}>
-          GET IN TOUCH
+          {activeChapter === 'leon' ? 'PONTE EN CONTACTO' : 'GET IN TOUCH'}
         </span>
         <h2 style={{
           fontFamily: 'var(--font-heading)',
@@ -81,13 +86,17 @@ export default function Contact() {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          Book your free class
+          {activeChapter === 'leon' ? 'Reserva tu clase gratis' : 'Book your free class'}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Send us a note and we'll get you set up for your first class at any of our chapters — no experience, no gear, just show up.
+          {activeChapter === 'leon' 
+            ? 'Envíanos un mensaje y te prepararemos para tu primera clase en cualquiera de nuestros grupos: sin experiencia, sin equipo, solo ven.'
+            : 'Send us a note and we\'ll get you set up for your first class at any of our chapters — no experience, no gear, just show up.'}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-          <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>Serving Concord, Long Beach, and León</span>
+          <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>
+            {activeChapter === 'leon' ? 'Sirviendo a Concord, Long Beach y León' : 'Serving Concord, Long Beach, and León'}
+          </span>
         </div>
       </motion.div>
       <motion.form variants={itemVariants} onSubmit={handleSubmit} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -96,7 +105,7 @@ export default function Contact() {
           required
           type="text"
           name="name"
-          placeholder="Your name"
+          placeholder={activeChapter === 'leon' ? 'Tu nombre' : 'Your name'}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <input
@@ -104,14 +113,14 @@ export default function Contact() {
           required
           type="email"
           name="email"
-          placeholder="Email address"
+          placeholder={activeChapter === 'leon' ? 'Correo electrónico' : 'Email address'}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <textarea
           id="message"
           required
           name="message"
-          placeholder="Tell us a bit about yourself"
+          placeholder={activeChapter === 'leon' ? 'Cuéntanos un poco sobre ti' : 'Tell us a bit about yourself'}
           rows={4}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)', resize: 'vertical' }}
         ></textarea>
@@ -134,7 +143,13 @@ export default function Contact() {
             opacity: status === 'submitting' ? 0.7 : 1
           }}
         >
-          {status === 'submitting' ? 'SENDING...' : status === 'success' ? 'MESSAGE SENT!' : status === 'error' ? 'ERROR! TRY AGAIN.' : 'SEND MESSAGE'}
+          {status === 'submitting' 
+            ? (activeChapter === 'leon' ? 'ENVIANDO...' : 'SENDING...') 
+            : status === 'success' 
+            ? (activeChapter === 'leon' ? '¡MENSAJE ENVIADO!' : 'MESSAGE SENT!') 
+            : status === 'error' 
+            ? (activeChapter === 'leon' ? '¡ERROR! INTENTA DE NUEVO.' : 'ERROR! TRY AGAIN.') 
+            : (activeChapter === 'leon' ? 'ENVIAR MENSAJE' : 'SEND MESSAGE')}
         </motion.button>
       </motion.form>
     </motion.section>

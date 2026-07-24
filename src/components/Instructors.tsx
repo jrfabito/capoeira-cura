@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
 
-export default function Instructors() {
+interface InstructorsProps {
+  activeChapter: ChapterId | null;
+}
+
+export default function Instructors({ activeChapter }: InstructorsProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -32,7 +37,7 @@ export default function Instructors() {
             letterSpacing: '0.12em', 
             color: 'var(--color-plum)' 
           }}>
-            OUR LINEAGE
+            {activeChapter === 'leon' ? 'NUESTRO LINAJE' : 'OUR LINEAGE'}
           </span>
           <h2 style={{ 
             fontFamily: 'var(--font-heading)', 
@@ -41,7 +46,7 @@ export default function Instructors() {
             margin: 0, 
             color: 'var(--color-ink)' 
           }}>
-            Meet the instructors
+            {activeChapter === 'leon' ? 'Conoce a los instructores' : 'Meet the instructors'}
           </h2>
         </motion.div>
         <motion.div variants={itemVariants} style={{ display: 'flex', flexWrap: 'wrap', gap: '56px', alignItems: 'center' }}>
@@ -59,7 +64,9 @@ export default function Instructors() {
               Mestre Preguiça
             </h3>
             <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-              A pioneering, influential figure of contemporary Capoeira for 50+ years. In 1996, Mestre Preguiça moved to Rio de Janeiro and founded Grupo Senzala, which gained worldwide recognition and became one of the most prominent Capoeira styles in Brazil. In 1984 he moved to San Francisco, where he founded a Community Action Program focused on mentorship, guidance, and free community Capoeira classes.
+              {activeChapter === 'leon' 
+                ? 'Una figura pionera e influyente de la Capoeira contemporánea por más de 50 años. En 1996, Mestre Preguiça se mudó a Río de Janeiro y fundó el Grupo Senzala, que obtuvo reconocimiento mundial y se convirtió en uno de los estilos de Capoeira más destacados de Brasil. En 1984 se mudó a San Francisco, donde fundó un Programa de Acción Comunitaria centrado en mentoría, orientación y clases comunitarias gratuitas de Capoeira.'
+                : 'A pioneering, influential figure of contemporary Capoeira for 50+ years. In 1996, Mestre Preguiça moved to Rio de Janeiro and founded Grupo Senzala, which gained worldwide recognition and became one of the most prominent Capoeira styles in Brazil. In 1984 he moved to San Francisco, where he founded a Community Action Program focused on mentorship, guidance, and free community Capoeira classes.'}
             </p>
           </div>
         </motion.div>
@@ -69,7 +76,9 @@ export default function Instructors() {
               Mestre Espantalho
             </h3>
             <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-              Born in San Francisco and raised in Mexico, Espantalho returned to San Francisco in 1994 and began training with Mestre Preguiça. He has taught capoeira in Mexico, Canada, and Brazil, and after 30 years of dedication, earned the rank of Mestre. When he's not teaching, he enjoys cooking, making capoeira instruments, and spending time with his daughter.
+              {activeChapter === 'leon'
+                ? 'Nacido en San Francisco y criado en México, Espantalho regresó a San Francisco en 1994 y comenzó a entrenar con Mestre Preguiça. Ha enseñado capoeira en México, Canadá y Brasil, y después de 30 años de dedicación, obtuvo el rango de Mestre. Cuando no está enseñando, disfruta cocinar, fabricar instrumentos de capoeira y pasar tiempo con su hija.'
+                : 'Born in San Francisco and raised in Mexico, Espantalho returned to San Francisco in 1994 and began training with Mestre Preguiça. He has taught capoeira in Mexico, Canada, and Brazil, and after 30 years of dedication, earned the rank of Mestre. When he\'s not teaching, he enjoys cooking, making capoeira instruments, and spending time with his daughter.'}
             </p>
           </div>
           <img 

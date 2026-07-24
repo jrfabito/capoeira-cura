@@ -13,6 +13,10 @@ export interface Chapter {
     address: string;
     mapQuery: string;
     mapEmbedUrl: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
   };
 }
 
@@ -28,7 +32,8 @@ export const chapters: Chapter[] = [
     location: {
       address: '2450 Grant St., Concord, CA 94520',
       mapQuery: '2450+Grant+St+Concord+CA+94520',
-      mapEmbedUrl: 'https://www.google.com/maps?q=2450+Grant+St+Concord+CA+94520&output=embed'
+      mapEmbedUrl: 'https://www.google.com/maps?q=2450+Grant+St+Concord+CA+94520&output=embed',
+      coordinates: { lat: 37.9779, lng: -122.0311 }
     }
   },
   {
@@ -42,7 +47,8 @@ export const chapters: Chapter[] = [
     location: {
       address: 'Long Beach, CA',
       mapQuery: 'Long+Beach+CA',
-      mapEmbedUrl: 'https://www.google.com/maps?q=Long+Beach+CA&output=embed'
+      mapEmbedUrl: 'https://www.google.com/maps?q=Long+Beach+CA&output=embed',
+      coordinates: { lat: 33.7701, lng: -118.1937 }
     }
   },
   {
@@ -56,7 +62,8 @@ export const chapters: Chapter[] = [
     location: {
       address: 'León, Guanajuato, Mexico',
       mapQuery: 'Leon+Guanajuato+Mexico',
-      mapEmbedUrl: 'https://www.google.com/maps?q=Leon+Guanajuato+Mexico&output=embed'
+      mapEmbedUrl: 'https://www.google.com/maps?q=Leon+Guanajuato+Mexico&output=embed',
+      coordinates: { lat: 21.1221, lng: -101.6833 }
     }
   }
 ];

@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
+import { t } from '../utils/translations';
 
-export default function WhatIsCapoeira() {
+interface WhatIsCapoeiraProps {
+  activeChapter: ChapterId | null;
+}
+
+export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
   return (
     <motion.section 
       initial={{ opacity: 0, y: 30 }}
@@ -34,7 +40,7 @@ export default function WhatIsCapoeira() {
           letterSpacing: '0.12em', 
           color: 'var(--color-plum)' 
         }}>
-          THE ART
+          {t('whatIsArt', activeChapter)}
         </span>
         <h2 style={{ 
           fontFamily: 'var(--font-heading)', 
@@ -43,10 +49,10 @@ export default function WhatIsCapoeira() {
           margin: 0, 
           color: 'var(--color-ink)' 
         }}>
-          What is Capoeira?
+          {t('whatIsTitle', activeChapter)}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Capoeira is a Brazilian art form born from enslaved Africans in the 16th century, blending fluid, rhythmic movement with kicks, spins, and takedowns. It's practiced in a circle called the roda, powered by live music from the berimbau, atabaque, and pandeiro. Above all, it's a celebration of resilience, creativity, and community.
+          {t('whatIsDesc', activeChapter)}
         </p>
         <motion.a 
           href="#videos" 
@@ -61,7 +67,7 @@ export default function WhatIsCapoeira() {
             gap: '8px',
             transformOrigin: 'left center'
           }}>
-          WATCH VIDEOS &rarr;
+          {t('whatIsLink', activeChapter)}
         </motion.a>
       </div>
     </motion.section>

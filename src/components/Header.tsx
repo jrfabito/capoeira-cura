@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
 
-export default function Header() {
+interface HeaderProps {
+  activeChapter: ChapterId | null;
+}
+
+export default function Header({ activeChapter }: HeaderProps) {
   return (
     <header style={{
       position: 'sticky', 
@@ -31,11 +36,11 @@ export default function Header() {
         </span>
       </div>
       <nav style={{ display: 'flex', alignItems: 'center', gap: 'clamp(16px,3vw,32px)', flexWrap: 'wrap' }}>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#about" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>ABOUT</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#schedule" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>SCHEDULE</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#instructors" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>INSTRUCTORS</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#videos" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>VIDEOS</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#faq" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>FAQ</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#about" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{activeChapter === 'leon' ? 'ACERCA DE' : 'ABOUT'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#schedule" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{activeChapter === 'leon' ? 'HORARIO' : 'SCHEDULE'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#instructors" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{activeChapter === 'leon' ? 'INSTRUCTORES' : 'INSTRUCTORS'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#videos" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{activeChapter === 'leon' ? 'VIDEOS' : 'VIDEOS'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#faq" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{activeChapter === 'leon' ? 'PREGUNTAS FRECUENTES' : 'FAQ'}</motion.a>
         <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} href="#contact" style={{ 
           background: 'var(--color-gold)', 
           color: 'var(--color-maroon)', 
@@ -45,7 +50,7 @@ export default function Header() {
           fontSize: '13px', 
           letterSpacing: '0.04em',
           display: 'inline-block'
-        }}>TRY A FREE CLASS</motion.a>
+        }}>{activeChapter === 'leon' ? 'PRUEBA UNA CLASE GRATIS' : 'TRY A FREE CLASS'}</motion.a>
       </nav>
     </header>
   );
