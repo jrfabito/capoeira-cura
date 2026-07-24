@@ -12,13 +12,14 @@ export default function Contact() {
     const data = new FormData(form);
 
     try {
-      // Replace YOUR_FORM_ID with the actual Formspree ID
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      // Using FormSubmit to send to personal email
+      const response = await fetch('https://formsubmit.co/ajax/jr.fabito@gmail.com', {
         method: 'POST',
-        body: data,
         headers: {
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
-        }
+        },
+        body: JSON.stringify(Object.fromEntries(data)),
       });
 
       if (response.ok) {
