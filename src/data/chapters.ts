@@ -55,9 +55,9 @@ export const chapters: Chapter[] = [
     id: 'leon',
     name: 'LEÓN, MEXICO',
     schedule: {
-      when: 'Wednesdays & Fridays\n7:00 – 8:30 PM',
-      cost: 'Contact for pricing',
-      who: 'All levels welcome\nKids and adults',
+      when: 'Miércoles y Viernes\n7:00 – 8:30 PM',
+      cost: 'Contáctanos para precios',
+      who: 'Todos los niveles son bienvenidos\nNiños y adultos',
     },
     location: {
       address: 'León, Guanajuato, Mexico',
