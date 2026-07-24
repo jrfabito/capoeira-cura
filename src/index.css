@@ -1,0 +1,58 @@
+:root {
+  --color-maroon: #3A0E28;
+  --color-maroon-dark: #2A0B1D;
+  --color-maroon-card: #4C1636;
+  --color-plum: #7C2E6D;
+  --color-plum-hover: #611F55;
+  --color-gold: #D9A441;
+  --color-cream: #FBF6EF;
+  --color-alt-bg: #F3E9E4;
+  --color-ink: #1F1410;
+  --color-muted: #4A3A42;
+  --color-muted-on-maroon: #E3CFDA;
+  --color-muted-dark-on-maroon: #C9A9BC;
+  --color-muted-darker-on-maroon: #8A6E7A;
+  --color-divider: #5A2646;
+  --color-input-border: #DDCBCF;
+  
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Public Sans', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-plum);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--color-plum-hover);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
