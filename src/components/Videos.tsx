@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
-export default function Videos() {
+interface VideosProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function Videos({ activeChapter: _activeChapter }: VideosProps) {
+  const { isSpanish } = useLanguage();
   const videos = [
     { title: 'Formatura', url: 'https://www.youtube.com/embed/7AsVVRn0QAE', id: 'v1' },
     { title: 'Jogo de Iuna', url: 'https://www.youtube.com/embed/AmT0Uqv0JpM', id: 'v2' },
@@ -43,7 +50,7 @@ export default function Videos() {
           letterSpacing: '0.12em',
           color: 'var(--color-plum)'
         }}>
-          SEE US MOVE
+          {isSpanish ? 'MÍRANOS EN ACCIÓN' : 'SEE US MOVE'}
         </span>
         <h2 style={{
           fontFamily: 'var(--font-heading)',

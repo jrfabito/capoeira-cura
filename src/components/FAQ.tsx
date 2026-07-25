@@ -1,15 +1,28 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
-export default function FAQ() {
+interface FAQProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function FAQ({ activeChapter: _activeChapter }: FAQProps) {
+  const { isSpanish } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0); // Default open first
 
-  const faqs = [
+  const faqs = isSpanish ? [
+    { q: '¿Necesito experiencia o equipo?', a: 'En lo absoluto. Ven con ropa cómoda con la que puedas moverte, descalzo y con una botella de agua; nosotros nos encargaremos del resto.' },
+    { q: '¿Qué edades pueden unirse?', a: 'Dependiendo de la ubicación, ofrecemos clases para niños, adolescentes y adultos. Consulta la sección de horarios para tu grupo.' },
+    { q: '¿Puedo tomar una sola clase suelta?', a: '¡Sí! Las clases sueltas son bienvenidas en todas nuestras ubicaciones. Consulta la sección de horarios para ver los horarios y precios.' },
+    { q: '¿Qué debo llevar?', a: 'Solo tú, ropa cómoda y una botella de agua. Nosotros ponemos la música y la comunidad.' },
+    { q: '¿Dónde están ubicados sus grupos?', a: 'Actualmente damos clases en Concord, CA, Long Beach, CA y León, México.' },
+  ] : [
     { q: 'Do I need any experience or gear?', a: 'None at all. Come in comfortable clothes you can move in, bare feet, and a water bottle — we\'ll take care of the rest.' },
-    { q: 'What ages can join?', a: 'Our class is for teens and adults. All levels welcome.' },
-    { q: 'Is the first class really free?', a: 'Yes — your first class is on us. After that, drop-ins are $15 per class.' },
+    { q: 'What ages can join?', a: 'Depending on the location, we offer classes for kids, teens, and adults. Please check the schedule section for your specific chapter.' },
+    { q: 'Can I drop in for a single class?', a: 'Yes! Drop-ins are welcome at all our locations. Check the schedule section for class times and pricing.' },
     { q: 'What should I bring?', a: 'Just yourself, comfortable clothing, and a water bottle. We provide the music and the community.' },
-    { q: 'Do you train anywhere besides Concord?', a: 'This branch trains in Concord, CA. We also have other branches in Long Beach, CA and León, Mexico.' },
+    { q: 'Where are your chapters located?', a: 'We currently hold classes in Concord, CA, Long Beach, CA, and León, Mexico.' },
   ];
 
   const toggle = (i: number) => {
@@ -47,7 +60,7 @@ export default function FAQ() {
             letterSpacing: '0.12em',
             color: 'var(--color-gold)'
           }}>
-            GOOD TO KNOW
+            {isSpanish ? 'BUENO SABERLO' : 'GOOD TO KNOW'}
           </span>
           <h2 style={{
             fontFamily: 'var(--font-heading)',
@@ -56,7 +69,7 @@ export default function FAQ() {
             margin: 0,
             color: '#FFFFFF'
           }}>
-            Frequently asked questions
+            {isSpanish ? 'Preguntas frecuentes' : 'Frequently asked questions'}
           </h2>
         </motion.div>
         <motion.div variants={containerVariants} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>

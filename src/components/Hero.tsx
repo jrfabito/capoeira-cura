@@ -1,6 +1,15 @@
 import { motion } from 'framer-motion';
 
-export default function Hero() {
+import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
+
+interface HeroProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function Hero({ activeChapter: _activeChapter }: HeroProps) {
+  const { isSpanish } = useLanguage();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -18,6 +27,14 @@ export default function Hero() {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1.2, ease: "easeOut" as const } }
   };
+
+  const titleText = isSpanish 
+    ? "Descubre el Ritmo, la Fuerza y la Cultura de la Capoeira" 
+    : "Discover the Rhythm, Strength, and Culture of Capoeira";
+    
+  const buttonText = isSpanish
+    ? "ÚNETE A UNA CLASE"
+    : "JOIN A CLASS";
 
   return (
     <section style={{
@@ -74,7 +91,7 @@ export default function Hero() {
             margin: 0, 
             textShadow: '0 2px 12px rgba(0,0,0,0.25)' 
           }}>
-          Discover the Rhythm, Strength, and Culture of Capoeira
+          {titleText}
         </motion.h1>
         <motion.a 
           variants={itemVariants}
@@ -92,7 +109,7 @@ export default function Hero() {
             borderRadius: '2px',
             display: 'inline-block'
           }}>
-          TRY A FREE CLASS
+          {buttonText}
         </motion.a>
       </motion.div>
     </section>

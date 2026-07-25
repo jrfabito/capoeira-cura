@@ -1,6 +1,24 @@
 import { motion } from 'framer-motion';
+import { chapters } from '../data/chapters';
+import type { ChapterId } from '../data/chapters';
+import { t } from '../utils/translations';
+import { useLanguage } from '../context/LanguageContext';
+import { useLightbox } from '../context/LightboxContext';
 
-export default function WhatIsCapoeira() {
+interface WhatIsCapoeiraProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
+  const { language } = useLanguage();
+  const { openLightbox } = useLightbox();
+  const currentChapterData = chapters.find(c => c.id === activeChapter);
+  const whatIsData = currentChapterData?.whatIsCapoeira;
+
+  const title = whatIsData ? whatIsData.title[language] : t('whatIsTitle', language);
+  const desc = whatIsData ? whatIsData.desc[language] : t('whatIsDesc', language);
+  const img = whatIsData ? whatIsData.image : '/assets/what-is-capoeira.jpg';
+
   return (
     <motion.section 
       initial={{ opacity: 0, y: 30 }}
@@ -17,11 +35,13 @@ export default function WhatIsCapoeira() {
         margin: '0 auto'
       }}>
         <motion.img 
-          src="/assets/what-is-capoeira.jpg" 
+          key={img}
+          src={img} 
           alt="Capoeira movement" 
           loading="lazy"
+          onClick={(e) => openLightbox((e.target as HTMLImageElement).src, 'Capoeira movement')}
         whileHover={{ scale: 1.03 }}
-        style={{ flex: '1 1 420px', minWidth: '280px', aspectRatio: '4/3', objectFit: 'cover', borderRadius: '10px' }}
+        style={{ flex: '1 1 420px', minWidth: '280px', aspectRatio: '4/3', objectFit: 'cover', borderRadius: '10px', cursor: 'zoom-in' }}
         onError={(e) => {
           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1579899320666-89689fbfd2f1?q=80&w=2942&auto=format&fit=crop';
         }}
@@ -34,7 +54,7 @@ export default function WhatIsCapoeira() {
           letterSpacing: '0.12em', 
           color: 'var(--color-plum)' 
         }}>
-          THE ART
+          {t('whatIsArt', language)}
         </span>
         <h2 style={{ 
           fontFamily: 'var(--font-heading)', 
@@ -43,10 +63,10 @@ export default function WhatIsCapoeira() {
           margin: 0, 
           color: 'var(--color-ink)' 
         }}>
-          What is Capoeira?
+          {title}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Capoeira is a Brazilian art form born from enslaved Africans in the 16th century, blending fluid, rhythmic movement with kicks, spins, and takedowns. It's practiced in a circle called the roda, powered by live music from the berimbau, atabaque, and pandeiro. Above all, it's a celebration of resilience, creativity, and community.
+          {desc}
         </p>
         <motion.a 
           href="#videos" 
@@ -61,7 +81,7 @@ export default function WhatIsCapoeira() {
             gap: '8px',
             transformOrigin: 'left center'
           }}>
-          WATCH VIDEOS &rarr;
+          {t('whatIsLink', language)}
         </motion.a>
       </div>
     </motion.section>

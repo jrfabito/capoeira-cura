@@ -1,14 +1,21 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
-export default function Contact() {
+interface ContactProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function Contact({ activeChapter: _activeChapter }: ContactProps) {
+  const { isSpanish } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
 
-    const form = e.target as HTMLFormElement;
+    const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
@@ -30,7 +37,7 @@ export default function Contact() {
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -58,13 +65,14 @@ export default function Contact() {
       variants={containerVariants}
       style={{
         padding: 'clamp(70px,9vw,120px) clamp(20px,6vw,80px)',
-        maxWidth: '1100px',
+        maxWidth: '1200px',
         margin: '0 auto',
         display: 'flex',
         flexWrap: 'wrap',
-        gap: '56px'
+        gap: '64px',
+        alignItems: 'flex-start'
       }}>
-      <motion.div variants={itemVariants} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+      <motion.div variants={itemVariants} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <span style={{
           fontFamily: 'var(--font-heading)',
           fontWeight: 700,
@@ -72,7 +80,7 @@ export default function Contact() {
           letterSpacing: '0.12em',
           color: 'var(--color-plum)'
         }}>
-          GET IN TOUCH
+          {isSpanish ? 'PONTE EN CONTACTO' : 'GET IN TOUCH'}
         </span>
         <h2 style={{
           fontFamily: 'var(--font-heading)',
@@ -81,14 +89,17 @@ export default function Contact() {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          Book your free class
+          {isSpanish ? 'Únete a una clase' : 'Join a Class'}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Send us a note and we'll get you set up for your first class in Concord — no experience, no gear, just show up.
+          {isSpanish
+            ? 'Envíanos un mensaje y te prepararemos para tu primera clase en cualquiera de nuestros grupos: sin experiencia, sin equipo, solo ven.'
+            : 'Send us a note and we\'ll get you set up for your first class at any of our chapters — no experience, no gear, just show up.'}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-          <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>2450 Grant St., Concord, CA 94520</span>
-          <a href="https://www.facebook.com/profile.php?id=100090832085640" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page" style={{ fontSize: '15px' }}>Add us on Facebook</a>
+          <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>
+            {isSpanish ? 'Sirviendo a Concord, Long Beach y León' : 'Serving Concord, Long Beach, and León'}
+          </span>
         </div>
       </motion.div>
       <motion.form variants={itemVariants} onSubmit={handleSubmit} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -97,7 +108,7 @@ export default function Contact() {
           required
           type="text"
           name="name"
-          placeholder="Your name"
+          placeholder={isSpanish ? 'Tu nombre' : 'Your name'}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <input
@@ -105,14 +116,14 @@ export default function Contact() {
           required
           type="email"
           name="email"
-          placeholder="Email address"
+          placeholder={isSpanish ? 'Correo electrónico' : 'Email address'}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <textarea
           id="message"
           required
           name="message"
-          placeholder="Tell us a bit about yourself"
+          placeholder={isSpanish ? 'Cuéntanos un poco sobre ti' : 'Tell us a bit about yourself'}
           rows={4}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)', resize: 'vertical' }}
         ></textarea>
@@ -135,7 +146,13 @@ export default function Contact() {
             opacity: status === 'submitting' ? 0.7 : 1
           }}
         >
-          {status === 'submitting' ? 'SENDING...' : status === 'success' ? 'MESSAGE SENT!' : status === 'error' ? 'ERROR! TRY AGAIN.' : 'SEND MESSAGE'}
+          {status === 'submitting'
+            ? (isSpanish ? 'ENVIANDO...' : 'SENDING...')
+            : status === 'success'
+            ? (isSpanish ? '¡MENSAJE ENVIADO!' : 'MESSAGE SENT!')
+            : status === 'error'
+            ? (isSpanish ? '¡ERROR! INTENTA DE NUEVO.' : 'ERROR! TRY AGAIN.')
+            : (isSpanish ? 'ENVIAR MENSAJE' : 'SEND MESSAGE')}
         </motion.button>
       </motion.form>
     </motion.section>

@@ -1,6 +1,25 @@
 import { motion } from 'framer-motion';
+import { chapters } from '../data/chapters';
+import type { ChapterId } from '../data/chapters';
+import { t } from '../utils/translations';
+import { useLanguage } from '../context/LanguageContext';
+import { useLightbox } from '../context/LightboxContext';
 
-export default function Intro() {
+interface IntroProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function Intro({ activeChapter }: IntroProps) {
+  const { language } = useLanguage();
+  const { openLightbox } = useLightbox();
+  const currentChapterData = chapters.find(c => c.id === activeChapter);
+  const introData = currentChapterData?.intro;
+
+  const title = introData ? introData.title[language] : t('introTitle', language);
+  const desc = introData ? introData.desc[language] : t('introDesc', language);
+  const img1 = introData ? introData.images[0] : '/assets/intro-1.jpg';
+  const img2 = introData ? introData.images[1] : '/assets/intro-2.jpg';
+
   return (
     <motion.section
       id="about"
@@ -18,21 +37,7 @@ export default function Intro() {
         margin: '0 auto'
       }}>
       <div style={{ flex: '1 1 460px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
-        <div style={{
-          backgroundColor: 'rgba(217, 164, 65, 0.15)',
-          borderLeft: '4px solid var(--color-gold)',
-          padding: '16px',
-          borderRadius: '4px',
-          color: 'var(--color-ink)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px'
-        }}>
-          <span style={{ fontSize: '20px' }}>ℹ️</span>
-          <span style={{ fontSize: '15px', lineHeight: 1.4 }}>
-            <strong>On break:</strong> Classes resume in August 2026
-          </span>
-        </div>
+
         <h2 style={{
           fontFamily: 'var(--font-heading)',
           fontWeight: 800,
@@ -41,46 +46,33 @@ export default function Intro() {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          Step into the roda, find your flow, and start your capoeira journey
+          {title}
         </h2>
         <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          Capoeira Cura is a fun community practicing Capoeira — a dynamic Afro-Brazilian art blending martial arts, dance, acrobatics, and live music. "Capoeira Cura" translates to "Capoeira Heals," reflecting our belief in movement as medicine. Whatever brought you here, our classes in Concord, CA meet you where you are: beginners and seasoned players train, play, and grow together in the roda.
+          {desc}
         </p>
-        <motion.a
-          href="#schedule"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-          style={{
-            alignSelf: 'flex-start',
-            background: 'var(--color-plum)',
-            color: '#FFFFFF',
-            padding: '16px 32px',
-            fontWeight: 700,
-            fontSize: '14px',
-            letterSpacing: '0.05em',
-            borderRadius: '2px',
-            display: 'inline-block'
-          }}>
-          SEE THE SCHEDULE
-        </motion.a>
       </div>
       <div style={{ flex: '1 1 420px', minWidth: '280px', display: 'flex', gap: '16px' }}>
         <motion.img
-          src="/assets/intro-1.jpg"
+          key={img1}
+          src={img1}
           alt="Class photo"
           loading="lazy"
+          onClick={(e) => openLightbox((e.target as HTMLImageElement).src, 'Class photo')}
           whileHover={{ scale: 1.03 }}
-          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px' }}
+          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', cursor: 'zoom-in' }}
           onError={(e) => {
             (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=2938&auto=format&fit=crop';
           }}
         />
         <motion.img
-          src="/assets/intro-2.jpg"
+          key={img2}
+          src={img2}
           alt="Culture photo"
           loading="lazy"
+          onClick={(e) => openLightbox((e.target as HTMLImageElement).src, 'Culture photo')}
           whileHover={{ scale: 1.03 }}
-          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', marginTop: '36px' }}
+          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', marginTop: '36px', cursor: 'zoom-in' }}
           onError={(e) => {
             (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549889656-1b44ebf2ff83?q=80&w=2938&auto=format&fit=crop';
           }}
