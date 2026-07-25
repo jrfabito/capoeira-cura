@@ -3,6 +3,7 @@ import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
 import { useLanguage } from '../context/LanguageContext';
+import { useLightbox } from '../context/LightboxContext';
 
 interface IntroProps {
   activeChapter?: ChapterId | null;
@@ -10,6 +11,7 @@ interface IntroProps {
 
 export default function Intro({ activeChapter }: IntroProps) {
   const { language } = useLanguage();
+  const { openLightbox } = useLightbox();
   const currentChapterData = chapters.find(c => c.id === activeChapter);
   const introData = currentChapterData?.intro;
 
@@ -56,8 +58,9 @@ export default function Intro({ activeChapter }: IntroProps) {
           src={img1}
           alt="Class photo"
           loading="lazy"
+          onClick={(e) => openLightbox((e.target as HTMLImageElement).src, 'Class photo')}
           whileHover={{ scale: 1.03 }}
-          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px' }}
+          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', cursor: 'zoom-in' }}
           onError={(e) => {
             (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=2938&auto=format&fit=crop';
           }}
@@ -67,8 +70,9 @@ export default function Intro({ activeChapter }: IntroProps) {
           src={img2}
           alt="Culture photo"
           loading="lazy"
+          onClick={(e) => openLightbox((e.target as HTMLImageElement).src, 'Culture photo')}
           whileHover={{ scale: 1.03 }}
-          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', marginTop: '36px' }}
+          style={{ flex: 1, minWidth: 0, width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: '10px', marginTop: '36px', cursor: 'zoom-in' }}
           onError={(e) => {
             (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549889656-1b44ebf2ff83?q=80&w=2938&auto=format&fit=crop';
           }}

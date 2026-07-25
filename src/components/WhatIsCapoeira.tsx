@@ -3,6 +3,7 @@ import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
 import { useLanguage } from '../context/LanguageContext';
+import { useLightbox } from '../context/LightboxContext';
 
 interface WhatIsCapoeiraProps {
   activeChapter?: ChapterId | null;
@@ -10,6 +11,7 @@ interface WhatIsCapoeiraProps {
 
 export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
   const { language } = useLanguage();
+  const { openLightbox } = useLightbox();
   const currentChapterData = chapters.find(c => c.id === activeChapter);
   const whatIsData = currentChapterData?.whatIsCapoeira;
 
@@ -37,8 +39,9 @@ export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
           src={img} 
           alt="Capoeira movement" 
           loading="lazy"
+          onClick={(e) => openLightbox((e.target as HTMLImageElement).src, 'Capoeira movement')}
         whileHover={{ scale: 1.03 }}
-        style={{ flex: '1 1 420px', minWidth: '280px', aspectRatio: '4/3', objectFit: 'cover', borderRadius: '10px' }}
+        style={{ flex: '1 1 420px', minWidth: '280px', aspectRatio: '4/3', objectFit: 'cover', borderRadius: '10px', cursor: 'zoom-in' }}
         onError={(e) => {
           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1579899320666-89689fbfd2f1?q=80&w=2942&auto=format&fit=crop';
         }}

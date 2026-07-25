@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import type { ChapterId } from './data/chapters';
 import { detectClosestChapter } from './utils/geolocation';
 import { LanguageProvider } from './context/LanguageContext';
+import { LightboxProvider } from './context/LightboxContext';
 
 function App() {
   const [activeChapter, setActiveChapter] = useState<ChapterId | null>(null);
@@ -30,20 +31,22 @@ function App() {
 
   return (
     <LanguageProvider activeChapter={activeChapter}>
-      <Header activeChapter={activeChapter} />
-      <main>
-        <Hero activeChapter={activeChapter} />
-        <Schedule activeChapter={activeChapter} setActiveChapter={setActiveChapter} />
-        <Intro activeChapter={activeChapter} />
-        <Gallery activeChapter={activeChapter} />
-        <WhatIsCapoeira activeChapter={activeChapter} />
-        <Location activeChapter={activeChapter} />
-        <Instructors activeChapter={activeChapter} />
-        <Videos activeChapter={activeChapter} />
-        <FAQ activeChapter={activeChapter} />
-        <Contact activeChapter={activeChapter} />
-      </main>
-      <Footer activeChapter={activeChapter} />
+      <LightboxProvider>
+        <Header activeChapter={activeChapter} />
+        <main>
+          <Hero activeChapter={activeChapter} />
+          <Schedule activeChapter={activeChapter} setActiveChapter={setActiveChapter} />
+          <Intro activeChapter={activeChapter} />
+          <Gallery activeChapter={activeChapter} />
+          <WhatIsCapoeira activeChapter={activeChapter} />
+          <Location activeChapter={activeChapter} />
+          <Instructors activeChapter={activeChapter} />
+          <Videos activeChapter={activeChapter} />
+          <FAQ activeChapter={activeChapter} />
+          <Contact activeChapter={activeChapter} />
+        </main>
+        <Footer activeChapter={activeChapter} />
+      </LightboxProvider>
     </LanguageProvider>
   );
 }
