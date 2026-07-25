@@ -1,6 +1,15 @@
 import { motion } from 'framer-motion';
+import { chapters } from '../data/chapters';
+import type { ChapterId } from '../data/chapters';
 
-export default function Gallery() {
+interface GalleryProps {
+  activeChapter?: ChapterId | null;
+}
+
+export default function Gallery({ activeChapter }: GalleryProps) {
+  const currentChapter = chapters.find(c => c.id === activeChapter);
+  const [img1, img2] = currentChapter?.gallery || ['/assets/gallery-1.jpg', '/assets/gallery-2.jpg'];
+
   return (
     <motion.section 
       initial={{ opacity: 0, y: 30 }}
@@ -10,7 +19,8 @@ export default function Gallery() {
       style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', marginTop: '40px' }}
     >
       <motion.img 
-        src="/assets/gallery-1.jpg" 
+        key={img1}
+        src={img1} 
         alt="Group class" 
         loading="lazy"
         whileHover={{ scale: 1.03, zIndex: 1, position: 'relative' }}
@@ -20,7 +30,8 @@ export default function Gallery() {
         }}
       />
       <motion.img 
-        src="/assets/gallery-2.jpg" 
+        key={img2}
+        src={img2} 
         alt="Cultural festival" 
         loading="lazy"
         whileHover={{ scale: 1.03, zIndex: 1, position: 'relative' }}

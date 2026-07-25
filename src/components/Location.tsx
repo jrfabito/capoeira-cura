@@ -75,38 +75,29 @@ export default function Location({ activeChapter }: LocationProps) {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </motion.div>
-      {activeChapter === 'concord' && (
-        <motion.div key="concord-photos" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', minWidth: 0 }}>
-            <img 
-              src="/assets/loc-parking.jpg" 
-              alt="Parking lot near the studio" 
-              loading="lazy"
-              style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', borderRadius: '8px' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=2940&auto=format&fit=crop';
-              }}
-            />
-            <div>
-              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '17px', margin: '0 0 4px', color: 'var(--color-ink)' }}>Parking Lot</h3>
-              <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-muted)' }}>Street parking on Grant St., closest to the studio entrance.</p>
+      {currentChapter.location.photos && currentChapter.location.photos.length > 0 && (
+        <motion.div key={`${activeChapter}-photos`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
+          {currentChapter.location.photos.map((photo, index) => (
+            <div key={photo.src || index} style={{ display: 'flex', flexDirection: 'column', gap: '14px', minWidth: 0 }}>
+              <img 
+                src={photo.src} 
+                alt={isSpanish ? photo.title.es : photo.title.en} 
+                loading="lazy"
+                style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', borderRadius: '8px' }}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = photo.fallbackUrl || 'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=2940&auto=format&fit=crop';
+                }}
+              />
+              <div>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '17px', margin: '0 0 4px', color: 'var(--color-ink)' }}>
+                  {isSpanish ? photo.title.es : photo.title.en}
+                </h3>
+                <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-muted)' }}>
+                  {isSpanish ? photo.desc.es : photo.desc.en}
+                </p>
+              </div>
             </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', minWidth: 0 }}>
-            <img 
-              src="/assets/loc-studio.jpg" 
-              alt="Dance studio building" 
-              loading="lazy"
-              style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', borderRadius: '8px' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1518042456426-ed877bc954fb?q=80&w=2942&auto=format&fit=crop';
-              }}
-            />
-            <div>
-              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '17px', margin: '0 0 4px', color: 'var(--color-ink)' }}>Dance Studio</h3>
-              <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-muted)' }}>Walk toward the building — you'll hear the berimbau before you see the door.</p>
-            </div>
-          </div>
+          ))}
         </motion.div>
       )}
     </motion.section>

@@ -35,7 +35,7 @@ function App() {
         <Hero activeChapter={activeChapter} />
         <Schedule activeChapter={activeChapter} setActiveChapter={setActiveChapter} />
         <Intro activeChapter={activeChapter} />
-        <Gallery />
+        <Gallery activeChapter={activeChapter} />
         <WhatIsCapoeira activeChapter={activeChapter} />
         <Location activeChapter={activeChapter} />
         <Instructors activeChapter={activeChapter} />

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
 import { useLanguage } from '../context/LanguageContext';
@@ -7,8 +8,15 @@ interface WhatIsCapoeiraProps {
   activeChapter?: ChapterId | null;
 }
 
-export default function WhatIsCapoeira({ activeChapter: _activeChapter }: WhatIsCapoeiraProps) {
+export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
   const { language } = useLanguage();
+  const currentChapterData = chapters.find(c => c.id === activeChapter);
+  const whatIsData = currentChapterData?.whatIsCapoeira;
+
+  const title = whatIsData ? whatIsData.title[language] : t('whatIsTitle', language);
+  const desc = whatIsData ? whatIsData.desc[language] : t('whatIsDesc', language);
+  const img = whatIsData ? whatIsData.image : '/assets/what-is-capoeira.jpg';
+
   return (
     <motion.section 
       initial={{ opacity: 0, y: 30 }}
@@ -25,7 +33,8 @@ export default function WhatIsCapoeira({ activeChapter: _activeChapter }: WhatIs
         margin: '0 auto'
       }}>
         <motion.img 
-          src="/assets/what-is-capoeira.jpg" 
+          key={img}
+          src={img} 
           alt="Capoeira movement" 
           loading="lazy"
         whileHover={{ scale: 1.03 }}
@@ -51,10 +60,10 @@ export default function WhatIsCapoeira({ activeChapter: _activeChapter }: WhatIs
           margin: 0, 
           color: 'var(--color-ink)' 
         }}>
-          {t('whatIsTitle', language)}
+          {title}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          {t('whatIsDesc', language)}
+          {desc}
         </p>
         <motion.a 
           href="#videos" 

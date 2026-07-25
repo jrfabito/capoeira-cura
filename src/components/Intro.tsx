@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
 import { useLanguage } from '../context/LanguageContext';
@@ -7,8 +8,16 @@ interface IntroProps {
   activeChapter?: ChapterId | null;
 }
 
-export default function Intro({ activeChapter: _activeChapter }: IntroProps) {
+export default function Intro({ activeChapter }: IntroProps) {
   const { language } = useLanguage();
+  const currentChapterData = chapters.find(c => c.id === activeChapter);
+  const introData = currentChapterData?.intro;
+
+  const title = introData ? introData.title[language] : t('introTitle', language);
+  const desc = introData ? introData.desc[language] : t('introDesc', language);
+  const img1 = introData ? introData.images[0] : '/assets/intro-1.jpg';
+  const img2 = introData ? introData.images[1] : '/assets/intro-2.jpg';
+
   return (
     <motion.section
       id="about"
@@ -35,15 +44,16 @@ export default function Intro({ activeChapter: _activeChapter }: IntroProps) {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          {t('introTitle', language)}
+          {title}
         </h2>
         <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          {t('introDesc', language)}
+          {desc}
         </p>
       </div>
       <div style={{ flex: '1 1 420px', minWidth: '280px', display: 'flex', gap: '16px' }}>
         <motion.img
-          src="/assets/intro-1.jpg"
+          key={img1}
+          src={img1}
           alt="Class photo"
           loading="lazy"
           whileHover={{ scale: 1.03 }}
@@ -53,7 +63,8 @@ export default function Intro({ activeChapter: _activeChapter }: IntroProps) {
           }}
         />
         <motion.img
-          src="/assets/intro-2.jpg"
+          key={img2}
+          src={img2}
           alt="Culture photo"
           loading="lazy"
           whileHover={{ scale: 1.03 }}
