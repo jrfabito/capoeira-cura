@@ -1,13 +1,18 @@
 export type ChapterId = 'concord' | 'long-beach' | 'leon';
 
+export interface ChapterSchedule {
+  when: string;
+  cost: string;
+  who: string;
+  note?: string;
+}
+
 export interface Chapter {
   id: ChapterId;
   name: string;
   schedule: {
-    when: string;
-    cost: string;
-    who: string;
-    note?: string;
+    en: ChapterSchedule;
+    es: ChapterSchedule;
   };
   location: {
     address: string;
@@ -25,9 +30,16 @@ export const chapters: Chapter[] = [
     id: 'concord',
     name: 'CONCORD, CA',
     schedule: {
-      when: 'Mondays & Thursdays\n7:00 – 8:00 PM',
-      cost: '$15 drop-in\nFirst class free',
-      who: 'All Levels Welcome, Teens & Adults.',
+      en: {
+        when: 'Mondays & Thursdays\n7:00 – 8:00 PM',
+        cost: '$15 drop-in',
+        who: 'All Levels Welcome, Teens & Adults.',
+      },
+      es: {
+        when: 'Lunes y Jueves\n7:00 – 8:00 PM',
+        cost: '$15 clase suelta',
+        who: 'Todos los niveles son bienvenidos\nAdolescentes y adultos.',
+      }
     },
     location: {
       address: '2450 Grant St., Concord, CA 94520',
@@ -40,9 +52,16 @@ export const chapters: Chapter[] = [
     id: 'long-beach',
     name: 'LONG BEACH, CA',
     schedule: {
-      when: 'Tuesdays & Thursdays\n6:00 – 7:00 PM',
-      cost: '$20 drop-in\nMonthly memberships available',
-      who: 'All Levels Welcome, Teens & Adults.',
+      en: {
+        when: 'Tuesdays & Thursdays\n6:00 – 7:00 PM',
+        cost: '$20 drop-in\nMonthly memberships available',
+        who: 'All Levels Welcome, Teens & Adults.',
+      },
+      es: {
+        when: 'Martes y Jueves\n6:00 – 7:00 PM',
+        cost: '$20 clase suelta\nMembresías mensuales disponibles',
+        who: 'Todos los niveles son bienvenidos\nAdolescentes y adultos.',
+      }
     },
     location: {
       address: 'Long Beach, CA',
@@ -55,9 +74,16 @@ export const chapters: Chapter[] = [
     id: 'leon',
     name: 'LEÓN, MEXICO',
     schedule: {
-      when: 'Miércoles y Viernes\n7:00 – 8:30 PM',
-      cost: 'Contáctanos para precios',
-      who: 'Todos los niveles son bienvenidos\nNiños y adultos',
+      en: {
+        when: 'Wednesdays & Fridays\n7:00 – 8:30 PM',
+        cost: 'Contact us for pricing',
+        who: 'All levels welcome\nKids & adults',
+      },
+      es: {
+        when: 'Miércoles y Viernes\n7:00 – 8:30 PM',
+        cost: 'Contáctanos para precios',
+        who: 'Todos los niveles son bienvenidos\nNiños y adultos',
+      }
     },
     location: {
       address: 'León, Guanajuato, Mexico',

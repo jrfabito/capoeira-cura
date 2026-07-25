@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
 
 import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
-  activeChapter: ChapterId | null;
+  activeChapter?: ChapterId | null;
 }
 
-export default function Hero({ activeChapter }: HeroProps) {
+export default function Hero({ activeChapter: _activeChapter }: HeroProps) {
+  const { isSpanish } = useLanguage();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -25,13 +28,13 @@ export default function Hero({ activeChapter }: HeroProps) {
     visible: { opacity: 1, transition: { duration: 1.2, ease: "easeOut" as const } }
   };
 
-  const titleText = activeChapter === 'leon' 
+  const titleText = isSpanish 
     ? "Descubre el Ritmo, la Fuerza y la Cultura de la Capoeira" 
     : "Discover the Rhythm, Strength, and Culture of Capoeira";
     
-  const buttonText = activeChapter === 'leon'
-    ? "PRUEBA UNA CLASE GRATIS"
-    : "TRY A FREE CLASS";
+  const buttonText = isSpanish
+    ? "ÚNETE A UNA CLASE"
+    : "JOIN A CLASS";
 
   return (
     <section style={{

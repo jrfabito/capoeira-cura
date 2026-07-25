@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ScheduleProps {
   activeChapter: ChapterId | null;
@@ -8,16 +9,19 @@ interface ScheduleProps {
 }
 
 export default function Schedule({ activeChapter, setActiveChapter }: ScheduleProps) {
+  const { language, isSpanish } = useLanguage();
+  const currentSchedule = chapters.find(c => c.id === activeChapter)?.schedule[language];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { staggerChildren: 0.2 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
@@ -27,13 +31,7 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: {
-          opacity: 1,
-          transition: { staggerChildren: 0.2 }
-        }
-      }}
+      variants={containerVariants}
       style={{ background: 'var(--color-maroon)', padding: 'clamp(70px,9vw,120px) clamp(20px,6vw,80px)' }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '48px' }}>
@@ -45,7 +43,7 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
             letterSpacing: '0.12em',
             color: 'var(--color-gold)'
           }}>
-            {activeChapter === 'leon' ? 'ÚNETE A UNA CLASE' : 'JOIN A CLASS'}
+            {isSpanish ? 'ÚNETE A UNA CLASE' : 'JOIN A CLASS'}
           </span>
           <h2 style={{
             fontFamily: 'var(--font-heading)',
@@ -54,14 +52,13 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
             margin: 0,
             color: '#FFFFFF'
           }}>
-            {activeChapter === 'leon' ? 'Cómo participar' : 'How to participate'}
+            {isSpanish ? 'Cómo participar' : 'How to participate'}
           </h2>
           <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted-on-maroon)', maxWidth: '640px', margin: 0 }}>
-            {activeChapter === 'leon' 
-              ? 'No necesitas experiencia, solo trae ropa cómoda, una botella de agua y una mente abierta. Tu primera clase es gratis.'
-              : 'No experience needed — just bring comfortable clothes, a bottle of water, and an open mind. Your first class is free.'}
+            {isSpanish 
+              ? 'No necesitas experiencia, solo trae ropa cómoda, una botella de agua y una mente abierta. Nuevos estudiantes siempre son bienvenidos.'
+              : 'No experience needed — just bring comfortable clothes, a bottle of water, and an open mind. New students and drop-ins are always welcome.'}
           </p>
-
         </motion.div>
 
         <motion.div variants={itemVariants} style={{ display: 'flex', justifyContent: 'center', gap: '32px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -92,7 +89,7 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
           {activeChapter === null ? (
             <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', width: '100%', padding: '32px 0' }}>
               <p style={{ fontSize: '18px', color: 'var(--color-muted-on-maroon)', margin: 0, fontWeight: 500 }}>
-                {activeChapter === 'leon' ? 'Elige una ubicación arriba para ver el horario.' : 'Choose a location above to see the schedule.'}
+                {isSpanish ? 'Elige una ubicación arriba para ver el horario.' : 'Choose a location above to see the schedule.'}
               </p>
             </motion.div>
           ) : (
@@ -108,10 +105,10 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                 gap: '12px'
               }}>
                 <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>
-                  {activeChapter === 'leon' ? 'CUÁNDO' : 'WHEN'}
+                  {isSpanish ? 'CUÁNDO' : 'WHEN'}
                 </span>
                 <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
-                  {chapters.find(c => c.id === activeChapter)?.schedule.when}
+                  {currentSchedule?.when}
                 </p>
               </motion.div>
               <motion.div key={`cost-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} style={{
@@ -125,10 +122,10 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                 gap: '12px'
               }}>
                 <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>
-                  {activeChapter === 'leon' ? 'COSTO' : 'COST'}
+                  {isSpanish ? 'COSTO' : 'COST'}
                 </span>
                 <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
-                  {chapters.find(c => c.id === activeChapter)?.schedule.cost}
+                  {currentSchedule?.cost}
                 </p>
               </motion.div>
               <motion.div key={`who-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 }} style={{
@@ -142,16 +139,15 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                 gap: '12px'
               }}>
                 <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>
-                  {activeChapter === 'leon' ? 'QUIÉN' : 'WHO'}
+                  {isSpanish ? 'QUIÉN' : 'WHO'}
                 </span>
                 <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
-                  {chapters.find(c => c.id === activeChapter)?.schedule.who}
+                  {currentSchedule?.who}
                 </p>
               </motion.div>
             </>
           )}
         </motion.div>
-
       </div>
     </motion.section>
   );

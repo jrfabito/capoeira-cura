@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
+import { useLanguage } from '../context/LanguageContext';
 
 interface WhatIsCapoeiraProps {
-  activeChapter: ChapterId | null;
+  activeChapter?: ChapterId | null;
 }
 
-export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
+export default function WhatIsCapoeira({ activeChapter: _activeChapter }: WhatIsCapoeiraProps) {
+  const { language } = useLanguage();
   return (
     <motion.section 
       initial={{ opacity: 0, y: 30 }}
@@ -40,7 +42,7 @@ export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
           letterSpacing: '0.12em', 
           color: 'var(--color-plum)' 
         }}>
-          {t('whatIsArt', activeChapter)}
+          {t('whatIsArt', language)}
         </span>
         <h2 style={{ 
           fontFamily: 'var(--font-heading)', 
@@ -49,10 +51,10 @@ export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
           margin: 0, 
           color: 'var(--color-ink)' 
         }}>
-          {t('whatIsTitle', activeChapter)}
+          {t('whatIsTitle', language)}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          {t('whatIsDesc', activeChapter)}
+          {t('whatIsDesc', language)}
         </p>
         <motion.a 
           href="#videos" 
@@ -67,7 +69,7 @@ export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
             gap: '8px',
             transformOrigin: 'left center'
           }}>
-          {t('whatIsLink', activeChapter)}
+          {t('whatIsLink', language)}
         </motion.a>
       </div>
     </motion.section>

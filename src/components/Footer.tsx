@@ -1,10 +1,12 @@
 import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
-  activeChapter: ChapterId | null;
+  activeChapter?: ChapterId | null;
 }
 
-export default function Footer({ activeChapter }: FooterProps) {
+export default function Footer({ activeChapter: _activeChapter }: FooterProps) {
+  const { isSpanish } = useLanguage();
   return (
     <footer style={{ 
       background: 'var(--color-maroon-dark)', 
@@ -33,10 +35,10 @@ export default function Footer({ activeChapter }: FooterProps) {
         </span>
       </div>
       <nav style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-        <a href="#about" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'ACERCA DE' : 'ABOUT'}</a>
-        <a href="#schedule" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'HORARIO' : 'SCHEDULE'}</a>
-        <a href="#videos" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'VIDEOS' : 'VIDEOS'}</a>
-        <a href="#contact" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{activeChapter === 'leon' ? 'CONTACTO' : 'CONTACT'}</a>
+        <a href="#about" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'ACERCA DE' : 'ABOUT'}</a>
+        <a href="#schedule" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'HORARIO' : 'SCHEDULE'}</a>
+        <a href="#videos" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'VIDEOS' : 'VIDEOS'}</a>
+        <a href="#contact" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'CONTACTO' : 'CONTACT'}</a>
       </nav>
       <span style={{ color: 'var(--color-muted-darker-on-maroon)', fontSize: '13px' }}>
         © 2026 Capoeira Cura

@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import type { ChapterId } from './data/chapters';
 import { detectClosestChapter } from './utils/geolocation';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   const [activeChapter, setActiveChapter] = useState<ChapterId | null>(null);
@@ -28,7 +29,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <LanguageProvider activeChapter={activeChapter}>
       <Header activeChapter={activeChapter} />
       <main>
         <Hero activeChapter={activeChapter} />
@@ -43,7 +44,7 @@ function App() {
         <Contact activeChapter={activeChapter} />
       </main>
       <Footer activeChapter={activeChapter} />
-    </>
+    </LanguageProvider>
   );
 }
 

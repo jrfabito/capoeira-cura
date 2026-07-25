@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ContactProps {
-  activeChapter: ChapterId | null;
+  activeChapter?: ChapterId | null;
 }
 
-export default function Contact({ activeChapter }: ContactProps) {
+export default function Contact({ activeChapter: _activeChapter }: ContactProps) {
+  const { isSpanish } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
 
-    const form = e.target as HTMLFormElement;
+    const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
@@ -35,7 +37,7 @@ export default function Contact({ activeChapter }: ContactProps) {
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -63,13 +65,14 @@ export default function Contact({ activeChapter }: ContactProps) {
       variants={containerVariants}
       style={{
         padding: 'clamp(70px,9vw,120px) clamp(20px,6vw,80px)',
-        maxWidth: '1100px',
+        maxWidth: '1200px',
         margin: '0 auto',
         display: 'flex',
         flexWrap: 'wrap',
-        gap: '56px'
+        gap: '64px',
+        alignItems: 'flex-start'
       }}>
-      <motion.div variants={itemVariants} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+      <motion.div variants={itemVariants} style={{ flex: '1 1 380px', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <span style={{
           fontFamily: 'var(--font-heading)',
           fontWeight: 700,
@@ -77,7 +80,7 @@ export default function Contact({ activeChapter }: ContactProps) {
           letterSpacing: '0.12em',
           color: 'var(--color-plum)'
         }}>
-          {activeChapter === 'leon' ? 'PONTE EN CONTACTO' : 'GET IN TOUCH'}
+          {isSpanish ? 'PONTE EN CONTACTO' : 'GET IN TOUCH'}
         </span>
         <h2 style={{
           fontFamily: 'var(--font-heading)',
@@ -86,16 +89,16 @@ export default function Contact({ activeChapter }: ContactProps) {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          {activeChapter === 'leon' ? 'Reserva tu clase gratis' : 'Book your free class'}
+          {isSpanish ? 'Únete a una clase' : 'Join a Class'}
         </h2>
         <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          {activeChapter === 'leon' 
+          {isSpanish
             ? 'Envíanos un mensaje y te prepararemos para tu primera clase en cualquiera de nuestros grupos: sin experiencia, sin equipo, solo ven.'
             : 'Send us a note and we\'ll get you set up for your first class at any of our chapters — no experience, no gear, just show up.'}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
           <span style={{ fontSize: '15px', color: 'var(--color-ink)', fontWeight: 600 }}>
-            {activeChapter === 'leon' ? 'Sirviendo a Concord, Long Beach y León' : 'Serving Concord, Long Beach, and León'}
+            {isSpanish ? 'Sirviendo a Concord, Long Beach y León' : 'Serving Concord, Long Beach, and León'}
           </span>
         </div>
       </motion.div>
@@ -105,7 +108,7 @@ export default function Contact({ activeChapter }: ContactProps) {
           required
           type="text"
           name="name"
-          placeholder={activeChapter === 'leon' ? 'Tu nombre' : 'Your name'}
+          placeholder={isSpanish ? 'Tu nombre' : 'Your name'}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <input
@@ -113,14 +116,14 @@ export default function Contact({ activeChapter }: ContactProps) {
           required
           type="email"
           name="email"
-          placeholder={activeChapter === 'leon' ? 'Correo electrónico' : 'Email address'}
+          placeholder={isSpanish ? 'Correo electrónico' : 'Email address'}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)' }}
         />
         <textarea
           id="message"
           required
           name="message"
-          placeholder={activeChapter === 'leon' ? 'Cuéntanos un poco sobre ti' : 'Tell us a bit about yourself'}
+          placeholder={isSpanish ? 'Cuéntanos un poco sobre ti' : 'Tell us a bit about yourself'}
           rows={4}
           style={{ padding: '14px 16px', border: '1px solid var(--color-input-border)', borderRadius: '4px', fontSize: '15px', fontFamily: 'var(--font-body)', resize: 'vertical' }}
         ></textarea>
@@ -143,13 +146,13 @@ export default function Contact({ activeChapter }: ContactProps) {
             opacity: status === 'submitting' ? 0.7 : 1
           }}
         >
-          {status === 'submitting' 
-            ? (activeChapter === 'leon' ? 'ENVIANDO...' : 'SENDING...') 
-            : status === 'success' 
-            ? (activeChapter === 'leon' ? '¡MENSAJE ENVIADO!' : 'MESSAGE SENT!') 
-            : status === 'error' 
-            ? (activeChapter === 'leon' ? '¡ERROR! INTENTA DE NUEVO.' : 'ERROR! TRY AGAIN.') 
-            : (activeChapter === 'leon' ? 'ENVIAR MENSAJE' : 'SEND MESSAGE')}
+          {status === 'submitting'
+            ? (isSpanish ? 'ENVIANDO...' : 'SENDING...')
+            : status === 'success'
+            ? (isSpanish ? '¡MENSAJE ENVIADO!' : 'MESSAGE SENT!')
+            : status === 'error'
+            ? (isSpanish ? '¡ERROR! INTENTA DE NUEVO.' : 'ERROR! TRY AGAIN.')
+            : (isSpanish ? 'ENVIAR MENSAJE' : 'SEND MESSAGE')}
         </motion.button>
       </motion.form>
     </motion.section>

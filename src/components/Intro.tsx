@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
+import { useLanguage } from '../context/LanguageContext';
 
 interface IntroProps {
-  activeChapter: ChapterId | null;
+  activeChapter?: ChapterId | null;
 }
 
-export default function Intro({ activeChapter }: IntroProps) {
+export default function Intro({ activeChapter: _activeChapter }: IntroProps) {
+  const { language } = useLanguage();
   return (
     <motion.section
       id="about"
@@ -33,10 +35,10 @@ export default function Intro({ activeChapter }: IntroProps) {
           margin: 0,
           color: 'var(--color-ink)'
         }}>
-          {t('introTitle', activeChapter)}
+          {t('introTitle', language)}
         </h2>
         <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, textWrap: 'pretty' }}>
-          {t('introDesc', activeChapter)}
+          {t('introDesc', language)}
         </p>
       </div>
       <div style={{ flex: '1 1 420px', minWidth: '280px', display: 'flex', gap: '16px' }}>

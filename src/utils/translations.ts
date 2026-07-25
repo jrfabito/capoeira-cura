@@ -4,8 +4,8 @@ export const translations = {
     es: "Descubre el Ritmo, la Fuerza y la Cultura de la Capoeira"
   },
   heroButton: {
-    en: "TRY A FREE CLASS",
-    es: "PRUEBA UNA CLASE GRATIS"
+    en: "JOIN A CLASS",
+    es: "ÚNETE A UNA CLASE"
   },
   introTitle: {
     en: "Step into the roda, find your flow, and start your capoeira journey",
@@ -33,7 +33,7 @@ export const translations = {
   }
 };
 
-export function t(key: keyof typeof translations, chapter: string | null) {
-  const lang = chapter === 'leon' ? 'es' : 'en';
+export function t(key: keyof typeof translations, langOrChapter: string | null) {
+  const lang = langOrChapter === 'es' || langOrChapter === 'leon' ? 'es' : 'en';
   return translations[key][lang];
 }

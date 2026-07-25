@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
+import { useLanguage } from '../context/LanguageContext';
 
 interface LocationProps {
   activeChapter: ChapterId | null;
 }
 
 export default function Location({ activeChapter }: LocationProps) {
+  const { isSpanish } = useLanguage();
   if (!activeChapter) return null;
   const currentChapter = chapters.find(c => c.id === activeChapter)!;
   const showOtherLocations = true;
@@ -46,7 +48,7 @@ export default function Location({ activeChapter }: LocationProps) {
           margin: 0, 
           color: 'var(--color-ink)' 
         }}>
-          {activeChapter === 'leon' ? '¿Dónde es la clase?' : 'Where is the class?'}
+          {isSpanish ? '¿Dónde es la clase?' : 'Where is the class?'}
         </h2>
         <p style={{ fontSize: '17px', margin: 0 }}>
           <a 
@@ -60,7 +62,7 @@ export default function Location({ activeChapter }: LocationProps) {
         </p>
         {showOtherLocations && (
           <p style={{ fontSize: '14px', margin: '4px 0 0', color: 'var(--color-muted-darker-on-maroon)' }}>
-            {activeChapter === 'leon' ? 'También tenemos grupos hermanos entrenando en otras ubicaciones.' : 'We also have sister groups training in other locations.'}
+            {isSpanish ? 'También tenemos grupos hermanos entrenando en otras ubicaciones.' : 'We also have sister groups training in other locations.'}
           </p>
         )}
       </motion.div>
