@@ -2,9 +2,20 @@ export type ChapterId = 'concord' | 'long-beach' | 'leon';
 
 export interface ChapterSchedule {
   when: string;
-  cost: string;
+  cost?: string;
   who: string;
   note?: string;
+}
+
+export interface ChapterSocial {
+  instagram?: {
+    handle: string;
+    url: string;
+  };
+  facebook?: {
+    handle: string;
+    url: string;
+  };
 }
 
 export interface Chapter {
@@ -23,6 +34,7 @@ export interface Chapter {
       lng: number;
     };
   };
+  social?: ChapterSocial;
 }
 
 export const chapters: Chapter[] = [
@@ -46,6 +58,12 @@ export const chapters: Chapter[] = [
       mapQuery: '2450+Grant+St+Concord+CA+94520',
       mapEmbedUrl: 'https://www.google.com/maps?q=2450+Grant+St+Concord+CA+94520&output=embed',
       coordinates: { lat: 37.9779, lng: -122.0311 }
+    },
+    social: {
+      facebook: {
+        handle: 'Capoeira Cura Concord',
+        url: 'https://www.facebook.com/profile.php?id=100090832085640'
+      }
     }
   },
   {
@@ -53,21 +71,25 @@ export const chapters: Chapter[] = [
     name: 'LONG BEACH, CA',
     schedule: {
       en: {
-        when: 'Tuesdays & Thursdays\n6:00 – 7:00 PM',
-        cost: '$20 drop-in\nMonthly memberships available',
-        who: 'All Levels Welcome, Teens & Adults.',
+        when: 'Tuesdays & Thursdays\n7:30 – 9:00 PM',
+        who: 'All levels Welcome, Teens & Adults',
       },
       es: {
-        when: 'Martes y Jueves\n6:00 – 7:00 PM',
-        cost: '$20 clase suelta\nMembresías mensuales disponibles',
-        who: 'Todos los niveles son bienvenidos\nAdolescentes y adultos.',
+        when: 'Martes y Jueves\n7:30 – 9:00 PM',
+        who: 'Todos los niveles son bienvenidos\nAdolescentes y adultos',
       }
     },
     location: {
-      address: 'Long Beach, CA',
-      mapQuery: 'Long+Beach+CA',
-      mapEmbedUrl: 'https://www.google.com/maps?q=Long+Beach+CA&output=embed',
-      coordinates: { lat: 33.7701, lng: -118.1937 }
+      address: '5555 Stearns St., Long Beach, CA 90815',
+      mapQuery: '5555+Stearns+St+Long+Beach+CA+90815',
+      mapEmbedUrl: 'https://www.google.com/maps?q=5555+Stearns+St+Long+Beach+CA+90815&output=embed',
+      coordinates: { lat: 33.7958, lng: -118.1252 }
+    },
+    social: {
+      instagram: {
+        handle: '@capoeiralongbeach_capoeiracura',
+        url: 'https://www.instagram.com/capoeiralongbeach_capoeiracura'
+      }
     }
   },
   {
@@ -75,21 +97,27 @@ export const chapters: Chapter[] = [
     name: 'LEÓN, MEXICO',
     schedule: {
       en: {
-        when: 'Wednesdays & Fridays\n7:00 – 8:30 PM',
-        cost: 'Contact us for pricing',
-        who: 'All levels welcome\nKids & adults',
+        when: 'Wednesdays & Fridays\n7:00 – 9:00 PM',
+        cost: '$350 MXN per month',
+        who: 'Open to all ages',
       },
       es: {
-        when: 'Miércoles y Viernes\n7:00 – 8:30 PM',
-        cost: 'Contáctanos para precios',
-        who: 'Todos los niveles son bienvenidos\nNiños y adultos',
+        when: 'Miércoles y Viernes\n7:00 – 9:00 PM',
+        cost: '$350 MXN por mes',
+        who: 'Abierto para todas las edades',
       }
     },
     location: {
-      address: 'León, Guanajuato, Mexico',
-      mapQuery: 'Leon+Guanajuato+Mexico',
-      mapEmbedUrl: 'https://www.google.com/maps?q=Leon+Guanajuato+Mexico&output=embed',
-      coordinates: { lat: 21.1221, lng: -101.6833 }
+      address: '1202 Burgos St., San Juan Bosco Neighborhood, León, Guanajuato, Mexico.',
+      mapQuery: 'Calle+Burgos+1202+San+Juan+Bosco+Leon+Guanajuato+Mexico',
+      mapEmbedUrl: 'https://www.google.com/maps?q=Calle+Burgos+1202+San+Juan+Bosco+Leon+Guanajuato+Mexico&output=embed',
+      coordinates: { lat: 21.1345, lng: -101.7011 }
+    },
+    social: {
+      instagram: {
+        handle: '@capoeira_cura_leon',
+        url: 'https://www.instagram.com/capoeira_cura_leon'
+      }
     }
   }
 ];

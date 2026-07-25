@@ -3,6 +3,24 @@ import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
 
+function InstagramIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+    </svg>
+  );
+}
+
 interface ScheduleProps {
   activeChapter: ChapterId | null;
   setActiveChapter: (id: ChapterId) => void;
@@ -10,7 +28,8 @@ interface ScheduleProps {
 
 export default function Schedule({ activeChapter, setActiveChapter }: ScheduleProps) {
   const { language, isSpanish } = useLanguage();
-  const currentSchedule = chapters.find(c => c.id === activeChapter)?.schedule[language];
+  const activeChapterData = chapters.find(c => c.id === activeChapter);
+  const currentSchedule = activeChapterData?.schedule[language];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -111,23 +130,25 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                   {currentSchedule?.when}
                 </p>
               </motion.div>
-              <motion.div key={`cost-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} style={{
-                flex: '1 1 260px',
-                maxWidth: '320px',
-                background: 'var(--color-maroon-card)',
-                borderRadius: '6px',
-                padding: '32px 28px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px'
-              }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>
-                  {isSpanish ? 'COSTO' : 'COST'}
-                </span>
-                <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
-                  {currentSchedule?.cost}
-                </p>
-              </motion.div>
+              {currentSchedule?.cost && (
+                <motion.div key={`cost-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} style={{
+                  flex: '1 1 260px',
+                  maxWidth: '320px',
+                  background: 'var(--color-maroon-card)',
+                  borderRadius: '6px',
+                  padding: '32px 28px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px'
+                }}>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '15px', color: 'var(--color-gold)', letterSpacing: '0.04em' }}>
+                    {isSpanish ? 'COSTO' : 'COST'}
+                  </span>
+                  <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: '#FFFFFF', whiteSpace: 'pre-line' }}>
+                    {currentSchedule.cost}
+                  </p>
+                </motion.div>
+              )}
               <motion.div key={`who-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 }} style={{
                 flex: '1 1 260px',
                 maxWidth: '320px',
@@ -145,6 +166,81 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                   {currentSchedule?.who}
                 </p>
               </motion.div>
+              {activeChapterData?.social && (
+                <motion.div
+                  key={`social-${activeChapter}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '16px',
+                    flexWrap: 'wrap',
+                    marginTop: '16px'
+                  }}
+                >
+                  {activeChapterData.social.instagram && (
+                    <motion.a
+                      href={activeChapterData.social.instagram.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05, borderColor: 'var(--color-gold)', color: 'var(--color-gold)' }}
+                      whileTap={{ scale: 0.97 }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '12px 24px',
+                        background: 'var(--color-maroon-card)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        borderRadius: '40px',
+                        color: '#FFFFFF',
+                        textDecoration: 'none',
+                        fontFamily: 'var(--font-heading)',
+                        fontWeight: 700,
+                        fontSize: '14px',
+                        letterSpacing: '0.04em',
+                        transition: 'all 0.2s ease',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      <InstagramIcon />
+                      <span>{activeChapterData.social.instagram.handle}</span>
+                    </motion.a>
+                  )}
+                  {activeChapterData.social.facebook && (
+                    <motion.a
+                      href={activeChapterData.social.facebook.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05, borderColor: 'var(--color-gold)', color: 'var(--color-gold)' }}
+                      whileTap={{ scale: 0.97 }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '12px 24px',
+                        background: 'var(--color-maroon-card)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        borderRadius: '40px',
+                        color: '#FFFFFF',
+                        textDecoration: 'none',
+                        fontFamily: 'var(--font-heading)',
+                        fontWeight: 700,
+                        fontSize: '14px',
+                        letterSpacing: '0.04em',
+                        transition: 'all 0.2s ease',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      <FacebookIcon />
+                      <span>{activeChapterData.social.facebook.handle}</span>
+                    </motion.a>
+                  )}
+                </motion.div>
+              )}
             </>
           )}
         </motion.div>
