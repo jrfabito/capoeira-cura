@@ -21,6 +21,16 @@ function FacebookIcon() {
   );
 }
 
+function AlertIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+  );
+}
+
 interface ScheduleProps {
   activeChapter: ChapterId | null;
   setActiveChapter: (id: ChapterId) => void;
@@ -113,6 +123,63 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
             </motion.div>
           ) : (
             <>
+              {currentSchedule?.alert && (
+                <motion.div
+                  key={`alert-${activeChapter}`}
+                  initial={{ opacity: 0, y: -15, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  style={{
+                    width: '100%',
+                    maxWidth: '1008px',
+                    background: 'linear-gradient(135deg, rgba(217, 164, 65, 0.18) 0%, rgba(217, 164, 65, 0.06) 100%)',
+                    border: '1px solid rgba(217, 164, 65, 0.45)',
+                    borderRadius: '8px',
+                    padding: '20px 24px',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '16px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '12px',
+                    background: 'rgba(217, 164, 65, 0.2)',
+                    color: 'var(--color-gold)',
+                    flexShrink: 0,
+                    border: '1px solid rgba(217, 164, 65, 0.3)'
+                  }}>
+                    <AlertIcon />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <span style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontWeight: 800,
+                      fontSize: '12px',
+                      letterSpacing: '0.1em',
+                      color: 'var(--color-gold)',
+                      textTransform: 'uppercase'
+                    }}>
+                      {isSpanish ? 'AVISO DE HORARIO' : 'SCHEDULE NOTICE'}
+                    </span>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      color: '#FFFFFF',
+                      lineHeight: 1.5
+                    }}>
+                      {currentSchedule.alert}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
               <motion.div key={`when-${activeChapter}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} style={{
                 flex: '1 1 260px',
                 maxWidth: '320px',

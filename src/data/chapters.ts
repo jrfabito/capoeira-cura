@@ -5,6 +5,7 @@ export interface ChapterSchedule {
   cost?: string;
   who: string;
   note?: string;
+  alert?: string;
 }
 
 export interface ChapterSocial {
@@ -69,11 +70,13 @@ export const chapters: Chapter[] = [
         when: 'Mondays & Thursdays\n7:00 – 8:00 PM',
         cost: '$15 drop-in',
         who: 'All Levels Welcome, Teens & Adults.',
+        alert: 'Classes on break and will resume in August 2026.',
       },
       es: {
         when: 'Lunes y Jueves\n7:00 – 8:00 PM',
         cost: '$15 clase suelta',
         who: 'Todos los niveles son bienvenidos\nAdolescentes y adultos.',
+        alert: 'Clases en receso; se reanudarán en agosto de 2026.',
       }
     },
     location: {
