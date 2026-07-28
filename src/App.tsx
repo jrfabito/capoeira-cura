@@ -15,6 +15,7 @@ import type { ChapterId } from './data/chapters';
 import { detectClosestChapter } from './utils/geolocation';
 import { LanguageProvider } from './context/LanguageContext';
 import { LightboxProvider } from './context/LightboxContext';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [activeChapter, setActiveChapter] = useState<ChapterId | null>(null);
@@ -46,6 +47,7 @@ function App() {
           <Contact activeChapter={activeChapter} />
         </main>
         <Footer activeChapter={activeChapter} />
+        <Analytics />
       </LightboxProvider>
     </LanguageProvider>
   );
