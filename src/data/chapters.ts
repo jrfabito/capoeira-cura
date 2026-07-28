@@ -57,7 +57,7 @@ export interface Chapter {
   };
   intro?: ChapterIntro;
   whatIsCapoeira?: ChapterWhatIs;
-  gallery?: [string, string];
+  gallery?: string[];
   social?: ChapterSocial;
 }
 
@@ -127,7 +127,7 @@ export const chapters: Chapter[] = [
       },
       image: '/assets/what-is-capoeira.jpg'
     },
-    gallery: ['/assets/gallery-1.jpg', '/assets/gallery-2.jpg'],
+    gallery: ['/assets/gallery-1.jpg', '/assets/gallery-2.jpg', '/assets/gallery-3.jpg'],
     social: {
       facebook: {
         handle: 'Capoeira Cura Concord',
