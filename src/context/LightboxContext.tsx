@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackEvent } from '../utils/analytics';
 
 interface LightboxContextType {
   openLightbox: (src: string, alt?: string) => void;
@@ -14,6 +15,7 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
 
   const openLightbox = (src: string, alt: string = 'Enlarged photo') => {
     setActiveImage({ src, alt });
+    trackEvent('Lightbox Opened');
   };
 
   const closeLightbox = () => {

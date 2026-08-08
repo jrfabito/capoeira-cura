@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../utils/analytics';
 
 function InstagramIcon() {
   return (
@@ -94,7 +95,7 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
           {chapters.map(chap => (
             <button
               key={chap.id}
-              onClick={() => setActiveChapter(chap.id)}
+              onClick={() => { setActiveChapter(chap.id); trackEvent('Chapter Selected', { chapter: chap.id }); }}
               style={{
                 background: 'none',
                 border: 'none',
@@ -253,6 +254,7 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                       href={activeChapterData.social.instagram.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => { if (activeChapterData) trackEvent('Social Click', { platform: 'instagram', chapter: activeChapterData.id }); }}
                       whileHover={{ scale: 1.05, borderColor: 'var(--color-gold)', color: 'var(--color-gold)' }}
                       whileTap={{ scale: 0.97 }}
                       style={{
@@ -282,6 +284,7 @@ export default function Schedule({ activeChapter, setActiveChapter }: SchedulePr
                       href={activeChapterData.social.facebook.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => { if (activeChapterData) trackEvent('Social Click', { platform: 'facebook', chapter: activeChapterData.id }); }}
                       whileHover={{ scale: 1.05, borderColor: 'var(--color-gold)', color: 'var(--color-gold)' }}
                       whileTap={{ scale: 0.97 }}
                       style={{

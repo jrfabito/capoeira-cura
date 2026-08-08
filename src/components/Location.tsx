@@ -3,6 +3,7 @@ import { chapters } from '../data/chapters';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
 import { useLightbox } from '../context/LightboxContext';
+import { trackEvent } from '../utils/analytics';
 
 interface LocationProps {
   activeChapter: ChapterId | null;
@@ -56,6 +57,7 @@ export default function Location({ activeChapter }: LocationProps) {
             href={`https://www.google.com/maps/search/?api=1&query=${currentChapter.location.mapQuery}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent('Location Click', { chapter: currentChapter.id })}
             style={{ color: 'var(--color-muted)', fontWeight: 600 }}
           >
             {currentChapter.location.address} ↗

@@ -129,6 +129,10 @@ export const chapters: Chapter[] = [
     },
     gallery: ['/assets/gallery-1.jpg', '/assets/gallery-2.jpg', '/assets/gallery-3.jpg'],
     social: {
+      instagram: {
+        handle: '@capoeira.cura',
+        url: 'https://www.instagram.com/capoeira.cura'
+      },
       facebook: {
         handle: 'Capoeira Cura Concord',
         url: 'https://www.facebook.com/profile.php?id=100090832085640'

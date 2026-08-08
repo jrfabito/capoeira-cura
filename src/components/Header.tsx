@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../utils/analytics';
 
 interface HeaderProps {
   activeChapter?: ChapterId | null;
@@ -39,17 +40,17 @@ export default function Header({ activeChapter: _activeChapter }: HeaderProps) {
         </span>
       </div>
       <nav style={{ display: 'flex', alignItems: 'center', gap: 'clamp(16px,3vw,32px)', flexWrap: 'wrap' }}>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#about" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'ACERCA DE' : 'ABOUT'}</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#schedule" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'HORARIO' : 'SCHEDULE'}</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#instructors" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'INSTRUCTORES' : 'INSTRUCTORS'}</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#videos" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'VIDEOS' : 'VIDEOS'}</motion.a>
-        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#faq" style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'PREGUNTAS FRECUENTES' : 'FAQ'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#about" onClick={() => trackEvent('Nav Click', { target: 'about' })} style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'ACERCA DE' : 'ABOUT'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#schedule" onClick={() => trackEvent('Nav Click', { target: 'schedule' })} style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'HORARIO' : 'SCHEDULE'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#instructors" onClick={() => trackEvent('Nav Click', { target: 'instructors' })} style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'INSTRUCTORES' : 'INSTRUCTORS'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#videos" onClick={() => trackEvent('Nav Click', { target: 'videos' })} style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'VIDEOS' : 'VIDEOS'}</motion.a>
+        <motion.a whileHover={{ y: -2, color: '#FFFFFF' }} href="#faq" onClick={() => trackEvent('Nav Click', { target: 'faq' })} style={{ color: 'var(--color-alt-bg)', fontWeight: 600, fontSize: '14px', letterSpacing: '0.03em', display: 'inline-block' }}>{isSpanish ? 'PREGUNTAS FRECUENTES' : 'FAQ'}</motion.a>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255, 255, 255, 0.1)', padding: '3px', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.15)', margin: '0 4px' }}>
           <motion.button
             type="button"
             whileTap={{ scale: 0.95 }}
-            onClick={() => setLanguage('en')}
+            onClick={() => { setLanguage('en'); trackEvent('Language Changed', { language: 'en' }); }}
             style={{
               background: language === 'en' ? 'var(--color-gold)' : 'transparent',
               color: language === 'en' ? 'var(--color-maroon)' : 'var(--color-cream)',
@@ -68,7 +69,7 @@ export default function Header({ activeChapter: _activeChapter }: HeaderProps) {
           <motion.button
             type="button"
             whileTap={{ scale: 0.95 }}
-            onClick={() => setLanguage('es')}
+            onClick={() => { setLanguage('es'); trackEvent('Language Changed', { language: 'es' }); }}
             style={{
               background: language === 'es' ? 'var(--color-gold)' : 'transparent',
               color: language === 'es' ? 'var(--color-maroon)' : 'var(--color-cream)',
@@ -86,7 +87,7 @@ export default function Header({ activeChapter: _activeChapter }: HeaderProps) {
           </motion.button>
         </div>
 
-        <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} href="#contact" style={{ 
+        <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} href="#contact" onClick={() => trackEvent('CTA Click', { source: 'header' })} style={{ 
           background: 'var(--color-gold)', 
           color: 'var(--color-maroon)', 
           padding: '10px 20px', 

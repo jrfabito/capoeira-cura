@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../utils/analytics';
 
 interface ContactProps {
   activeChapter?: ChapterId | null;
@@ -32,13 +33,16 @@ export default function Contact({ activeChapter: _activeChapter }: ContactProps)
       if (response.ok) {
         setStatus('success');
         form.reset();
+        trackEvent('Form Submission', { status: 'success' });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
+        trackEvent('Form Submission', { status: 'error' });
         setTimeout(() => setStatus('idle'), 5000);
       }
     } catch {
       setStatus('error');
+      trackEvent('Form Submission', { status: 'error' });
       setTimeout(() => setStatus('idle'), 5000);
     }
   };

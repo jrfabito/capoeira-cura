@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../utils/analytics';
 
 interface HeroProps {
   activeChapter?: ChapterId | null;
@@ -97,6 +98,7 @@ export default function Hero({ activeChapter: _activeChapter }: HeroProps) {
           variants={itemVariants}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
+          onClick={() => trackEvent('CTA Click', { source: 'hero' })}
           href="#contact" 
           style={{ 
             pointerEvents: 'auto', 

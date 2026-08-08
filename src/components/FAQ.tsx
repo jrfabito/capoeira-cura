@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../utils/analytics';
 
 interface FAQProps {
   activeChapter?: ChapterId | null;
@@ -27,6 +28,7 @@ export default function FAQ({ activeChapter: _activeChapter }: FAQProps) {
 
   const toggle = (i: number) => {
     setOpenIndex(openIndex === i ? null : i);
+    trackEvent('FAQ Toggled', { index: i, action: openIndex === i ? 'close' : 'open' });
   };
 
   const containerVariants = {

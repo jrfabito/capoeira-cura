@@ -1,5 +1,6 @@
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../utils/analytics';
 
 interface FooterProps {
   activeChapter?: ChapterId | null;
@@ -35,10 +36,10 @@ export default function Footer({ activeChapter: _activeChapter }: FooterProps) {
         </span>
       </div>
       <nav style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-        <a href="#about" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'ACERCA DE' : 'ABOUT'}</a>
-        <a href="#schedule" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'HORARIO' : 'SCHEDULE'}</a>
-        <a href="#videos" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'VIDEOS' : 'VIDEOS'}</a>
-        <a href="#contact" style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'CONTACTO' : 'CONTACT'}</a>
+        <a href="#about" onClick={() => trackEvent('Nav Click', { target: 'about' })} style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'ACERCA DE' : 'ABOUT'}</a>
+        <a href="#schedule" onClick={() => trackEvent('Nav Click', { target: 'schedule' })} style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'HORARIO' : 'SCHEDULE'}</a>
+        <a href="#videos" onClick={() => trackEvent('Nav Click', { target: 'videos' })} style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'VIDEOS' : 'VIDEOS'}</a>
+        <a href="#contact" onClick={() => trackEvent('Nav Click', { target: 'contact' })} style={{ color: 'var(--color-muted-dark-on-maroon)', fontSize: '13px', fontWeight: 600 }}>{isSpanish ? 'CONTACTO' : 'CONTACT'}</a>
       </nav>
       <span style={{ color: 'var(--color-muted-darker-on-maroon)', fontSize: '13px' }}>
         © 2026 Capoeira Cura

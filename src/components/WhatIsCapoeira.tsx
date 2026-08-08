@@ -4,6 +4,7 @@ import type { ChapterId } from '../data/chapters';
 import { t } from '../utils/translations';
 import { useLanguage } from '../context/LanguageContext';
 import { useLightbox } from '../context/LightboxContext';
+import { trackEvent } from '../utils/analytics';
 
 interface WhatIsCapoeiraProps {
   activeChapter?: ChapterId | null;
@@ -70,6 +71,7 @@ export default function WhatIsCapoeira({ activeChapter }: WhatIsCapoeiraProps) {
         </p>
         <motion.a 
           href="#videos" 
+          onClick={() => trackEvent('CTA Click', { source: 'what_is_capoeira' })}
           whileHover={{ x: 5, color: 'var(--color-gold)' }}
           style={{ 
             fontWeight: 700, 

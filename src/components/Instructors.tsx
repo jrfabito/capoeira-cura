@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { ChapterId } from '../data/chapters';
 import { useLanguage } from '../context/LanguageContext';
 import { useLightbox } from '../context/LightboxContext';
+import { trackEvent } from '../utils/analytics';
 
 interface InstructorsProps {
   activeChapter?: ChapterId | null;
@@ -158,12 +159,12 @@ export default function Instructors({ activeChapter: _activeChapter }: Instructo
                 </p>
                 {(inst.fullBioEn || inst.fullBioEs) && (
                   <button
-                    onClick={() => setBioModal({
+                    onClick={() => { setBioModal({
                       name: inst.name,
                       image: inst.image,
                       fallbackImage: inst.fallbackImage,
                       paragraphs: isSpanish ? (inst.fullBioEs || []) : (inst.fullBioEn || [])
-                    })}
+                    }); trackEvent('Instructor Bio Viewed', { instructor: inst.name }); }}
                     style={{
                       background: 'none',
                       border: 'none',
